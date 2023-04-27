@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class IndividualVisitEntry {
   private int vId;
-  private int lTimesVisit;
+  private int iTimesVisit;
 }
