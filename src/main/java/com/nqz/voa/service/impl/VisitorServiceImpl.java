@@ -1,7 +1,7 @@
 package com.nqz.voa.service.impl;
 
-import com.nqz.voa.dao.VisitorMapper;
-import com.nqz.voa.enrty.*;
+import com.nqz.voa.mapper.VisitorMapper;
+import com.nqz.voa.entry.*;
 import com.nqz.voa.service.VisitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

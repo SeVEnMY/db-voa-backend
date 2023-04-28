@@ -1,7 +1,9 @@
 package com.nqz.voa.controller;
 
-import com.nqz.voa.enrty.VisitorEntry;
+import com.nqz.voa.entry.AccountEntry;
+import com.nqz.voa.entry.VisitorEntry;
 import com.nqz.voa.model.Result;
+import com.nqz.voa.service.AccountService;
 import com.nqz.voa.service.VisitorService;
 import io.swagger.annotations.Api;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,14 +19,34 @@ import java.util.List;
 @Api(tags = "Visitor")
 public class VisitorController {
 
+    public static final String SESSION_NAME = "userInfo";
+
     @Autowired
     private VisitorService visitorService;
+
+    @Autowired
+    private AccountController accountController;
+
+    @Autowired
+    private AccountService accountServie;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public Result<List<VisitorEntry>> findAllVisitors(HttpServletRequest request, HttpServletResponse response) {
         Result<List<VisitorEntry>> result = new Result<>();
 
         /*check admin*/
+        if (!accountController.isLogin(request, response).isSuccess()) {
+            result.setResultFailed("Not logged in！");
+            return result;
+        }
+
+        AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
+        String accEmail = sessionUser.getAcc_email();
+        if (!accountServie.isAdmin(accEmail)) {
+            result.setResultFailed("No Permission!");
+            return result;
+        }
+
 
         result.setResultSuccess("Success!", visitorService.findAllVisitors());
         return result;

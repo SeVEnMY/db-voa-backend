@@ -1,13 +1,15 @@
 package com.nqz.voa.service.impl;
 
-import com.nqz.voa.dao.AccountMapper;
-import com.nqz.voa.enrty.AccountEntry;
-import com.nqz.voa.enrty.LoginRequestEntry;
+import com.nqz.voa.mapper.AccountMapper;
+import com.nqz.voa.entry.AccountEntry;
+import com.nqz.voa.entry.LoginRequestEntry;
 import com.nqz.voa.model.Result;
 import com.nqz.voa.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AccountServiceImpl implements AccountService {
 
   @Autowired
@@ -38,7 +40,7 @@ public class AccountServiceImpl implements AccountService {
       result.setResultFailed("Account does not exist!");
       return result;
     }
-    if (!getAccount.getAccPWD().equals(DigestUtils.md5Hex(loginRequest.getAccPwd()))) {
+    if (!getAccount.getAcc_pwd().equals(DigestUtils.md5Hex(loginRequest.getAccPwd()))) {
       result.setResultFailed("Account email or password does not match!");
       return result;
     }

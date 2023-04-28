@@ -1,7 +1,7 @@
 package com.nqz.voa.service;
 
-import com.nqz.voa.enrty.AccountEntry;
-import com.nqz.voa.enrty.LoginRequestEntry;
+import com.nqz.voa.entry.AccountEntry;
+import com.nqz.voa.entry.LoginRequestEntry;
 import com.nqz.voa.model.Result;
 
 public interface AccountService {

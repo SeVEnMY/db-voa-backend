@@ -10,5 +10,4 @@ public class VoaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(VoaApplication.class, args);
 	}
-
 }

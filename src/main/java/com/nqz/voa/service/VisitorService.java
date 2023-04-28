@@ -1,6 +1,6 @@
 package com.nqz.voa.service;
 
-import com.nqz.voa.enrty.*;
+import com.nqz.voa.entry.*;
 
 import java.util.List;
 
