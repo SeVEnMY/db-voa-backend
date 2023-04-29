@@ -1,6 +1,7 @@
 package com.nqz.voa.service;
 
 import com.nqz.voa.entry.CashPayEntry;
+import com.nqz.voa.entry.CreditDebitPayEntry;
 import com.nqz.voa.entry.PaymentEntry;
 import java.util.List;
 
@@ -14,11 +15,11 @@ public interface PaymentService {
 
   Integer findPaymentByInfo(String payTime, long payAmount, String payMethod);
 
-  Integer findCustomerIdByEmail(String email);
-
   int addCashPay(int payId, int caChange);
 
   int addCreditDebitPay(int payId, String cdName, String cdNum, String cdExDate, String cdCvv, String cdCredit);
 
-//  CashPayEntry findCashPayById()
+  CashPayEntry findCashPayById(int payId);
+
+  CreditDebitPayEntry findCreditDebitPayById(int payId);
 }

@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
   }
 
   @Override
-  public Integer createNewOrder(String oDate, int oQuantity, long oAmount, int shId, int vId, int payId, int stId, int miId, int tktId, int parkId) {
+  public int createNewOrder(String oDate, int oQuantity, long oAmount, int shId, int vId, int payId, int stId, int miId, int tktId, int parkId) {
     return orderMapper.createNewOrder(oDate, oQuantity, oAmount, shId, vId, payId, stId, miId, tktId, parkId);
   }
 
