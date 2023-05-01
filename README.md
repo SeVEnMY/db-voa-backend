@@ -41,3 +41,9 @@ voa/
 - Password Encryption
 - Session evaluation for identification
 - Use Mybatis to connect Java webserver to database
+
+# Database Designs
+### Logical Model
+![logical model](./img/logical.png)
+### Relational Model
+![relational model](./img/relational.png)
