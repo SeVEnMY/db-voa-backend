@@ -10,11 +10,14 @@ import java.util.List;
 @Mapper
 public interface PaymentMapper {
 
+  @Select("SELECT * FROM nqz_payment")
+  List<PaymentEntry> findAllPayments();
+
   @Select("SELECT * FROM nqz_payment NATURAL JOIN nqz_order WHERE o_id = #{oId}")
   List<PaymentEntry> findPaymentByOrderId(int oId);
 
   @Select("SELECT * FROM nqz_payment WHERE pay_id = #{payId}")
-  List<PaymentEntry> findPaymentById(int payId);
+  PaymentEntry findPaymentById(int payId);
 
   @Insert("INSERT INTO nqz_payment (pay_time, pay_amount, pay_method) VALUES (str_to_date( #{payTime} , '%Y-%m-%d %H:%i:%s' ), #{payAmount}, #{payMethod} ) ")
   int addNewPayment(String payTime, long payAmount, String payMethod);

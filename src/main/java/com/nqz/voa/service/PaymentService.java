@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface PaymentService {
 
+  List<PaymentEntry> findAllPayments();
+
   List<PaymentEntry> findPaymentByOrderId(int oId);
 
   PaymentEntry findPaymentById(int payId);
@@ -19,7 +21,4 @@ public interface PaymentService {
 
   int addCreditDebitPay(int payId, String cdName, String cdNum, String cdExDate, String cdCvv, String cdCredit);
 
-  CashPayEntry findCashPayById(int payId);
-
-  CreditDebitPayEntry findCreditDebitPayById(int payId);
 }

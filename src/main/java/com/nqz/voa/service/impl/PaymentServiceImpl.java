@@ -3,48 +3,52 @@ package com.nqz.voa.service.impl;
 import com.nqz.voa.entry.CashPayEntry;
 import com.nqz.voa.entry.CreditDebitPayEntry;
 import com.nqz.voa.entry.PaymentEntry;
+import com.nqz.voa.mapper.PaymentMapper;
 import com.nqz.voa.service.PaymentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PaymentServiceImpl implements PaymentService {
+
+  @Autowired
+  protected PaymentMapper paymentMapper;
+
+  @Override
+  public List<PaymentEntry> findAllPayments() {
+    return paymentMapper.findAllPayments();
+  }
+
   @Override
   public List<PaymentEntry> findPaymentByOrderId(int oId) {
-    return null;
+    return paymentMapper.findPaymentByOrderId(oId);
   }
 
   @Override
   public PaymentEntry findPaymentById(int payId) {
-    return null;
+    return paymentMapper.findPaymentById(payId);
   }
 
   @Override
   public int addNewPayment(String payTime, long payAmount, String payMethod) {
-    return 0;
+    return paymentMapper.addNewPayment(payTime, payAmount, payMethod);
   }
 
   @Override
   public Integer findPaymentByInfo(String payTime, long payAmount, String payMethod) {
-    return null;
+    return paymentMapper.findPaymentByInfo(payTime, payAmount, payMethod);
   }
 
   @Override
   public int addCashPay(int payId, int caChange) {
-    return 0;
+    return paymentMapper.addCashPay(payId, caChange);
   }
 
   @Override
   public int addCreditDebitPay(int payId, String cdName, String cdNum, String cdExDate, String cdCvv, String cdCredit) {
-    return 0;
+    return paymentMapper.addCreditDebitPay(payId, cdName, cdNum, cdExDate, cdCvv, cdCredit);
   }
 
-  @Override
-  public CashPayEntry findCashPayById(int payId) {
-    return null;
-  }
-
-  @Override
-  public CreditDebitPayEntry findCreditDebitPayById(int payId) {
-    return null;
-  }
 }
