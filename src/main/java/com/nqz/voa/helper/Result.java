@@ -1,4 +1,4 @@
-package com.nqz.voa.model;
+package com.nqz.voa.helper;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

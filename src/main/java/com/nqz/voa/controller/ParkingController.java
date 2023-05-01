@@ -3,7 +3,7 @@ package com.nqz.voa.controller;
 import com.nqz.voa.entry.AccountEntry;
 import com.nqz.voa.entry.ParkingEntry;
 import com.nqz.voa.entry.ParkingLotEntry;
-import com.nqz.voa.model.Result;
+import com.nqz.voa.helper.Result;
 import com.nqz.voa.service.AccountService;
 import com.nqz.voa.service.ParkingService;
 import io.swagger.annotations.Api;

@@ -2,7 +2,7 @@ package com.nqz.voa.service;
 
 import com.nqz.voa.entry.AccountEntry;
 import com.nqz.voa.entry.LoginRequestEntry;
-import com.nqz.voa.model.Result;
+import com.nqz.voa.helper.Result;
 
 public interface AccountService {
   int Register(String accEmail, String accPwd, int vId);

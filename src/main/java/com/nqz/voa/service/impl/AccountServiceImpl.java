@@ -3,7 +3,7 @@ package com.nqz.voa.service.impl;
 import com.nqz.voa.mapper.AccountMapper;
 import com.nqz.voa.entry.AccountEntry;
 import com.nqz.voa.entry.LoginRequestEntry;
-import com.nqz.voa.model.Result;
+import com.nqz.voa.helper.Result;
 import com.nqz.voa.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.commons.codec.digest.DigestUtils;

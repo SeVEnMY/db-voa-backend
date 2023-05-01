@@ -2,7 +2,7 @@ package com.nqz.voa.controller;
 
 import com.nqz.voa.entry.AccountEntry;
 import com.nqz.voa.entry.VisitorEntry;
-import com.nqz.voa.model.Result;
+import com.nqz.voa.helper.Result;
 import com.nqz.voa.service.AccountService;
 import com.nqz.voa.service.VisitorService;
 import io.swagger.annotations.Api;
