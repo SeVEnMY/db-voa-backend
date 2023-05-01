@@ -2,8 +2,6 @@ package com.nqz.voa.service;
 
 import com.nqz.voa.entry.ParkingEntry;
 import com.nqz.voa.entry.ParkingLotEntry;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 

@@ -1,7 +1,5 @@
 package com.nqz.voa.service;
 
-import com.nqz.voa.entry.CashPayEntry;
-import com.nqz.voa.entry.CreditDebitPayEntry;
 import com.nqz.voa.entry.PaymentEntry;
 import java.util.List;
 
