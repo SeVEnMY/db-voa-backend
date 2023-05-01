@@ -8,6 +8,8 @@ voa/src/main/java/com/nqz/voa/
 ├── entry                     <-- Data Entities
 ├── helper                    <-- Helper Classes
 └── service                   <-- Services and Implementations
+voa/
+├── db                        <-- Database Queries
 ```
 
 
@@ -17,6 +19,7 @@ voa/src/main/java/com/nqz/voa/
     - Spring Boot Web
     - Maven
     - MySQL Local Sever (XAMPP, MySQL Workbench)
+- Please init the database use files inside the folder`/voa/db`
 - Make sure your sql server is running at port 3306, or you could change the sql server URL in file `./resources/application-dev.yml`
 - Build the project and run `VoaApplication.java`
 - The server is running on port 8080 by default.
