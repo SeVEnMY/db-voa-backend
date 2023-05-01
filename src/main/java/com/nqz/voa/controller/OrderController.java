@@ -1,6 +1,7 @@
 package com.nqz.voa.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.nqz.voa.entry.AccountEntry;
 import com.nqz.voa.entry.OrderEntry;
 import com.nqz.voa.helper.Result;
@@ -119,6 +120,46 @@ public class OrderController {
     result.setResultSuccess("Success!", null);
 
     return result;
+  }
+
+  @RequestMapping(value = "/updateoamount", method = RequestMethod.PUT)
+  public Object updateOrderAmount(@RequestParam int oId, @RequestParam long oAmount,
+                             HttpServletRequest request, HttpServletResponse response) {
+    JSONObject json = new JSONObject();
+
+    // is login?
+    if (!accountController.isLogin(request, response).isSuccess()) {
+      json.put("message", "Not logged in!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    // get user account name
+    AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
+    String accEmail = sessionUser.getAcc_email();
+
+    if (!accountService.isAdmin(accEmail)) {
+      json.put("message", "No Permission!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    if (oId < 0 || oAmount < 0) {
+      json.put("message", "Error invalid variables");
+      return json;
+    }
+
+    OrderEntry orderEntry = orderService.findOrderById(oId);
+    if (orderEntry == null) {
+      json.put("message", String.format("Error no such order, orderId=%s", oId));
+      return json;
+    }
+
+    orderService.updateOrderAmount(oId, oAmount);
+    json.put("message", "Success!");
+    return json;
   }
 
 }

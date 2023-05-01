@@ -22,4 +22,7 @@ public interface OrderMapper {
   @Insert("INSERT INTO nqz_order (o_date, o_quantity, o_amount, pay_id, v_id, sh_id, st_id, mi_id, park_id, tkt_id) " +
           "VALUES (str_to_date( #{oDate} , '%Y-%m-%d' ), #{oQuantity}, #{oAmount}, #{payId}, #{vId}, #{shId}, #{stId}, #{miId}, #{parkId}, #{tktId});")
   Integer createNewOrder(String oDate, int oQuantity, long oAmount, int shId, int vId, int payId, int stId, int miId, int tktId, int parkId);
+
+  @Select("update nqz_order set o_amount = #{oAmount} where o_id = #{oId}")
+  void updateOrderAmount(int oId, long oAmount);
 }

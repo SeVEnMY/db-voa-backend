@@ -34,4 +34,9 @@ public class OrderServiceImpl implements OrderService {
     return orderMapper.createNewOrder(oDate, oQuantity, oAmount, shId, vId, payId, stId, miId, tktId, parkId);
   }
 
+  @Override
+  public void updateOrderAmount(int oId, long oAmount) {
+    orderMapper.updateOrderAmount(oId, oAmount);
+  }
+
 }

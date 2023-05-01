@@ -13,4 +13,6 @@ public interface OrderService {
 
   int createNewOrder(String oDate, int oQuantity, long oAmount, int shId, int vId, int payId, int stId, int miId, int tktId, int parkId);
 
+  void updateOrderAmount(int oId, long oAmount);
+
 }
