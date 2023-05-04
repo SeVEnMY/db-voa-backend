@@ -33,7 +33,7 @@ public class AttractionServiceImpl implements AttractionService {
 
   @Override
   public List<AttractionTypeEntry> findAllAttractionTypes() {
-    return findAllAttractionTypes();
+    return attractionMapper.findAllAttractionTypes();
   }
 
   @Override

@@ -740,7 +740,7 @@ CREATE TABLE nqz_visitor (
 --  country from
     v_country VARCHAR(15) NOT NULL COMMENT 'country from', 
 --  email address
-    v_email   VARCHAR(20) NOT NULL COMMENT 'email address', 
+    v_email   VARCHAR(30) NOT NULL COMMENT 'email address',
 --  telephone number
     v_telnum  VARCHAR(20) NOT NULL COMMENT 'telephone number', 
 -- SQLINES DEMO ***  "S", "I", or "G"

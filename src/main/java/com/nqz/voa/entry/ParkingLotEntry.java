@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class ParkingLotEntry {
   private int pl_id;
-  private int pl_name;
+  private String pl_name;
 }
