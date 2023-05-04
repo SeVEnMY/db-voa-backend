@@ -572,3 +572,8 @@ VALUES (str_to_date( '2023-02-28' , '%Y-%m-%d' ), 3, 0, 19, 12, null, 7, 11, nul
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
 INSERT INTO nqz_order (o_date, o_quantity, o_amount, pay_id, v_id, sh_id, st_id, mi_id, park_id, tkt_id)
 VALUES (str_to_date( '2023-01-31' , '%Y-%m-%d' ), 2, 0, 20, 1, null, 9, 14, null, null);
+
+-- Insert roles
+INSERT INTO nqz_role (r_name) VALUE ("user");
+INSERT INTO nqz_role (r_name) VALUE ("admin");
+
