@@ -11,7 +11,7 @@ public interface OrderService {
 
   List<OrderEntry> findOrderByVID(int vId);
 
-  int createNewOrder(String oDate, int oQuantity, long oAmount, int shId, int vId, int payId, int stId, int miId, int tktId, int parkId);
+  int createNewOrder(String oDate, int oQuantity, long oAmount, Integer shId, int vId, Integer payId, Integer stId, Integer miId, Integer tktId, Integer parkId);
 
   void updateOrderAmount(int oId, long oAmount);
 

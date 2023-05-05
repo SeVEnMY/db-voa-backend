@@ -8,11 +8,11 @@ public class OrderEntry {
   private String o_date;
   private int o_quantity;
   private long o_amount;
-  private int sh_id;
+  private Integer sh_id;
   private int v_id;
-  private int pay_id;
-  private int st_id;
-  private int mi_id;
-  private int tkt_id;
-  private int park_id;
+  private Integer pay_id;
+  private Integer st_id;
+  private Integer mi_id;
+  private Integer tkt_id;
+  private Integer park_id;
 }
