@@ -19,9 +19,6 @@ public interface TicketMapper {
           "VALUES (#{tktOnline}, str_to_date( #{tktVisitDate} , '%Y-%m-%d' ), #{tktPrice}, #{tktDiscount}, #{tktIspaid}, #{tktTypeId});")
   int addTicket(String tktOnline, String tktVisitDate, int tktPrice, int tktDiscount, String tktIspaid, int tktTypeId);
 
-  @Select("SELECT LAST_INSERT_ID()")
-  int getLastInsertedTicketId();
-
   @Select("SELECT * FROM nqz_tkt_type")
   List<TicketTypeEntry> findAllTicketTypes();
 

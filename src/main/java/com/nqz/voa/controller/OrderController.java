@@ -5,7 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.nqz.voa.entry.AccountEntry;
 import com.nqz.voa.entry.OrderEntry;
 import com.nqz.voa.helper.Result;
+import com.nqz.voa.mapper.HelperMapper;
 import com.nqz.voa.service.AccountService;
+import com.nqz.voa.service.HelperService;
 import com.nqz.voa.service.OrderService;
 import io.swagger.annotations.Api;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,6 +35,9 @@ public class OrderController {
 
   @Autowired
   private AccountController accountController;
+
+  @Autowired
+  private HelperService helperService;
 
   @RequestMapping(value = "/list", method = RequestMethod.GET)
   public Result<List<OrderEntry>> findAllOrders(HttpServletRequest request, HttpServletResponse response) {
@@ -83,7 +88,7 @@ public class OrderController {
   }
 
   @RequestMapping(value = "/createorder", method = RequestMethod.POST)
-  public Result<OrderEntry> createOrder(HttpServletRequest request,
+  public Result<Integer> createOrder(HttpServletRequest request,
                                         @RequestParam String oDate,
                                         @RequestParam int oQuantity,
                                         @RequestParam long oAmount,
@@ -95,7 +100,7 @@ public class OrderController {
                                         @RequestParam int tktId,
                                         @RequestParam int parkId) {
 
-    Result<OrderEntry> result = new Result<>();
+    Result<Integer> result = new Result<>();
     HttpSession session = request.getSession();
     // get user info from session
     AccountEntry sessionUser = (AccountEntry) session.getAttribute(SESSION_NAME);
@@ -117,7 +122,7 @@ public class OrderController {
     }
 
     orderService.createNewOrder(oDate, oQuantity, oAmount, shId, vId, payId, stId, miId, tktId, parkId);
-    result.setResultSuccess("Success!", null);
+    result.setResultSuccess("Success!", helperService.getLastInsertedId());
 
     return result;
   }

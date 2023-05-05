@@ -4,6 +4,7 @@ import com.nqz.voa.entry.*;
 import com.nqz.voa.helper.Result;
 import com.nqz.voa.service.AccountService;
 import com.nqz.voa.service.AttractionService;
+import com.nqz.voa.service.HelperService;
 import com.nqz.voa.service.TicketService;
 import io.swagger.annotations.Api;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,6 +33,9 @@ public class TicketController {
   @Autowired
   private AttractionService attractionService;
 
+  @Autowired
+  private HelperService helperService;
+
   @RequestMapping(value = "/list", method = RequestMethod.GET)
   public Result<List<TicketEntry>> findAllTickets(HttpServletRequest request, HttpServletResponse response) {
     Result<List<TicketEntry>> result = new Result<>();
@@ -55,7 +59,7 @@ public class TicketController {
                        @RequestParam int tktTypeId) {
 
     ticketService.addTicket(tktOnline, tktVisitDate, tktPrice, tktDiscount, tktIspaid, tktTypeId);
-    return ticketService.getLastInsertedTicketId();
+    return helperService.getLastInsertedId();
   }
 
   @RequestMapping(value = "/get", method = RequestMethod.GET)

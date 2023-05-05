@@ -31,11 +31,6 @@ public class TicketServiceImpl implements TicketService {
   }
 
   @Override
-  public int getLastInsertedTicketId() {
-    return ticketMapper.getLastInsertedTicketId();
-  }
-
-  @Override
   public List<TicketTypeEntry> findAllTicketTypes() {
     return ticketMapper.findAllTicketTypes();
   }
