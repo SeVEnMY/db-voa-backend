@@ -94,7 +94,7 @@ public class OrderController {
                                         @RequestParam long oAmount,
                                         @RequestParam(required = false) Integer shId,
                                         @RequestParam int vId,
-                                        @RequestParam int payId,
+                                        @RequestParam(required = false) Integer payId,
                                         @RequestParam(required = false) Integer stId,
                                         @RequestParam(required = false) Integer miId,
                                         @RequestParam(required = false) Integer tktId,
