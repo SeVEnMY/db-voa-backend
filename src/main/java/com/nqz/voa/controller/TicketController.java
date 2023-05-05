@@ -54,7 +54,8 @@ public class TicketController {
                        @RequestParam String tktIspaid,
                        @RequestParam int tktTypeId) {
 
-    return ticketService.addTicket(tktOnline, tktVisitDate, tktPrice, tktDiscount, tktIspaid, tktTypeId);
+    ticketService.addTicket(tktOnline, tktVisitDate, tktPrice, tktDiscount, tktIspaid, tktTypeId);
+    return ticketService.getLastInsertedTicketId();
   }
 
   @RequestMapping(value = "/get", method = RequestMethod.GET)

@@ -13,6 +13,8 @@ public interface TicketService {
 
   int addTicket(String tktOnline, String tktVisitDate, int tktPrice, int tktDiscount, String tktIspaid, int tktTypeId);
 
+  int getLastInsertedTicketId();
+
   List<TicketTypeEntry> findAllTicketTypes();
 
   int addTicketType(String tktTypeName);

@@ -3,9 +3,7 @@ package com.nqz.voa.mapper;
 import com.nqz.voa.entry.AttractionEntry;
 import com.nqz.voa.entry.TicketEntry;
 import com.nqz.voa.entry.TicketTypeEntry;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -18,8 +16,11 @@ public interface TicketMapper {
   TicketEntry findTicketById(int tktId);
 
   @Insert("INSERT INTO nqz_ticket (tkt_online, tkt_visit_date, tkt_price, tkt_discount, tkt_ispaid, tkttype_id) " +
-          "VALUES (#{tktOnline}, str_to_date( #{tktVisitDate} , '%Y-%m-%d' ), #{tktPrice}, #{tktDiscount}, #{tktIspaid}, #{tktTypeId})")
+          "VALUES (#{tktOnline}, str_to_date( #{tktVisitDate} , '%Y-%m-%d' ), #{tktPrice}, #{tktDiscount}, #{tktIspaid}, #{tktTypeId});")
   int addTicket(String tktOnline, String tktVisitDate, int tktPrice, int tktDiscount, String tktIspaid, int tktTypeId);
+
+  @Select("SELECT LAST_INSERT_ID()")
+  int getLastInsertedTicketId();
 
   @Select("SELECT * FROM nqz_tkt_type")
   List<TicketTypeEntry> findAllTicketTypes();
