@@ -92,13 +92,13 @@ public class OrderController {
                                         @RequestParam String oDate,
                                         @RequestParam int oQuantity,
                                         @RequestParam long oAmount,
-                                        @RequestParam int shId,
+                                        @RequestParam(required = false) Integer shId,
                                         @RequestParam int vId,
                                         @RequestParam int payId,
-                                        @RequestParam int stId,
-                                        @RequestParam int miId,
-                                        @RequestParam int tktId,
-                                        @RequestParam int parkId) {
+                                        @RequestParam(required = false) Integer stId,
+                                        @RequestParam(required = false) Integer miId,
+                                        @RequestParam(required = false) Integer tktId,
+                                        @RequestParam(required = false) Integer parkId) {
 
     Result<Integer> result = new Result<>();
     HttpSession session = request.getSession();
