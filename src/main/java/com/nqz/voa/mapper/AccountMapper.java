@@ -17,7 +17,8 @@ public interface AccountMapper {
   @Select("SELECT v_type FROM nqz_account NATURAL JOIN nqz_visitor WHERE acc_email = #{accEmail}")
   String findVisitTypeByAccEmail(String accEmail);
 
-  @Select("SELECT r_name FROM nqz_account NATURAL JOIN nqz_acc_role NATURAL JOIN nqz_role WHERE acc_email = #{accEmail}")
+  @Select("SELECT r_name FROM nqz_account NATURAL JOIN nqz_acc_role NATURAL JOIN nqz_role WHERE acc_email = #{accEmail} " +
+          "LIMIT 1")
   String getRoleByEmail(String accEmail);
 
   @Insert("INSERT INTO nqz_acc_role (acc_id, r_id) VALUES (#{accId}, 1)")
