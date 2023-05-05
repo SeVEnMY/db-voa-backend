@@ -44,4 +44,9 @@ public class TicketServiceImpl implements TicketService {
   public int addAttractionToTicket(int tktId, int attId, String tktAttTime) {
     return ticketMapper.addAttractionToTicket(tktId, attId, tktAttTime);
   }
+
+  @Override
+  public void payTicket(int tktId) {
+    ticketMapper.payTicket(tktId);
+  }
 }

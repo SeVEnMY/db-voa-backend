@@ -1,5 +1,6 @@
 package com.nqz.voa.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.nqz.voa.entry.*;
 import com.nqz.voa.helper.Result;
 import com.nqz.voa.service.AccountService;
@@ -137,4 +138,34 @@ public class TicketController {
 
     return ticketService.addAttractionToTicket(tktId, attId, tktAttTime);
   }
+
+  @RequestMapping(value = "/payticket", method = RequestMethod.PUT)
+  public Object payTicket(@RequestParam int tktId,
+                            HttpServletRequest request, HttpServletResponse response) {
+    JSONObject json = new JSONObject();
+
+    // is login?
+    if (!accountController.isLogin(request, response).isSuccess()) {
+      json.put("message", "Not logged in!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    if (tktId < 0) {
+      json.put("message", "Error invalid variables");
+      return json;
+    }
+
+    TicketEntry ticketEntry = ticketService.findTicketById(tktId);
+    if (ticketEntry == null) {
+      json.put("message", String.format("Error no such ticket, ticketId=%s", tktId));
+      return json;
+    }
+
+    ticketService.payTicket(tktId);
+    json.put("message", "Success!");
+    return json;
+  }
+
 }

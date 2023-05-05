@@ -18,4 +18,6 @@ public interface TicketService {
   int addTicketType(String tktTypeName);
 
   int addAttractionToTicket(int tktId, int attId, String tktAttTime);
+
+  void payTicket(int tktId);
 }

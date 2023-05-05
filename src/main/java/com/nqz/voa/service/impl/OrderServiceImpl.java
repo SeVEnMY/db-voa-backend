@@ -39,4 +39,9 @@ public class OrderServiceImpl implements OrderService {
     orderMapper.updateOrderAmount(oId, oAmount);
   }
 
+  @Override
+  public void updatePayId(int oId, Integer payId) {
+    orderMapper.updatePayId(oId, payId);
+  }
+
 }

@@ -15,4 +15,6 @@ public interface OrderService {
 
   void updateOrderAmount(int oId, long oAmount);
 
+  void updatePayId(int oId, Integer payId);
+
 }

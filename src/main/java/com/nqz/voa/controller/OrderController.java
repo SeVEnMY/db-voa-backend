@@ -4,11 +4,10 @@ package com.nqz.voa.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.nqz.voa.entry.AccountEntry;
 import com.nqz.voa.entry.OrderEntry;
+import com.nqz.voa.entry.PaymentEntry;
 import com.nqz.voa.helper.Result;
 import com.nqz.voa.mapper.HelperMapper;
-import com.nqz.voa.service.AccountService;
-import com.nqz.voa.service.HelperService;
-import com.nqz.voa.service.OrderService;
+import com.nqz.voa.service.*;
 import io.swagger.annotations.Api;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -38,6 +37,9 @@ public class OrderController {
 
   @Autowired
   private HelperService helperService;
+
+  @Autowired
+  private PaymentService paymentService;
 
   @RequestMapping(value = "/list", method = RequestMethod.GET)
   public Result<List<OrderEntry>> findAllOrders(HttpServletRequest request, HttpServletResponse response) {
@@ -140,17 +142,6 @@ public class OrderController {
       return json;
     }
 
-    // get user account name
-    AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
-    String accEmail = sessionUser.getAcc_email();
-
-    if (!accountService.isAdmin(accEmail)) {
-      json.put("message", "No Permission!");
-      json.put("success", false);
-      json.put("data", null);
-      return json;
-    }
-
     if (oId < 0 || oAmount < 0) {
       json.put("message", "Error invalid variables");
       return json;
@@ -163,6 +154,41 @@ public class OrderController {
     }
 
     orderService.updateOrderAmount(oId, oAmount);
+    json.put("message", "Success!");
+    return json;
+  }
+
+  @RequestMapping(value = "/updatepayment", method = RequestMethod.PUT)
+  public Object updatePayId(@RequestParam int oId, @RequestParam Integer payId,
+                                  HttpServletRequest request, HttpServletResponse response) {
+    JSONObject json = new JSONObject();
+
+    // is login?
+    if (!accountController.isLogin(request, response).isSuccess()) {
+      json.put("message", "Not logged in!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    if (oId < 0 || payId < 0) {
+      json.put("message", "Error invalid variables");
+      return json;
+    }
+
+    OrderEntry orderEntry = orderService.findOrderById(oId);
+    if (orderEntry == null) {
+      json.put("message", String.format("Error no such order, orderId=%s", oId));
+      return json;
+    }
+
+    PaymentEntry paymentEntry = paymentService.findPaymentById(payId);
+    if (paymentEntry == null) {
+      json.put("message", String.format("Error no such payment, payId=%s", payId));
+      return json;
+    }
+
+    orderService.updatePayId(oId, payId);
     json.put("message", "Success!");
     return json;
   }

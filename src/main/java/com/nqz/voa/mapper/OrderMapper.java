@@ -25,4 +25,8 @@ public interface OrderMapper {
 
   @Select("update nqz_order set o_amount = #{oAmount} where o_id = #{oId}")
   void updateOrderAmount(int oId, long oAmount);
+
+  @Select("update nqz_order set pay_id = #{payId} where o_id = #{oId}")
+  void updatePayId(int oId, Integer payId);
+
 }

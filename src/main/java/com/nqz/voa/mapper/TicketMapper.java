@@ -28,4 +28,7 @@ public interface TicketMapper {
   @Insert("INSERT INTO nqz_tkt_att  (tkt_id, att_id, tkt_att_time) " +
           "VALUES (#{tktId}, #{attId}, str_to_date( #{tktAttTime} , '%Y-%m-%d %H:%i:%s' ))")
   int addAttractionToTicket(int tktId, int attId, String tktAttTime);
+
+  @Select("update nqz_ticket set tkt_ispaid = '1' where tkt_id = #{tktId}")
+  void payTicket(int tktId);
 }
