@@ -1,5 +1,7 @@
 package com.nqz.voa.service.impl;
 
+import com.nqz.voa.entry.CashPayEntry;
+import com.nqz.voa.entry.CreditDebitPayEntry;
 import com.nqz.voa.entry.PaymentEntry;
 import com.nqz.voa.mapper.PaymentMapper;
 import com.nqz.voa.service.PaymentService;
@@ -42,6 +44,16 @@ public class PaymentServiceImpl implements PaymentService {
   @Override
   public int addCreditDebitPay(int payId, String cdName, String cdNum, String cdExDate, String cdCvv, String cdCredit) {
     return paymentMapper.addCreditDebitPay(payId, cdName, cdNum, cdExDate, cdCvv, cdCredit);
+  }
+
+  @Override
+  public CashPayEntry getCashPayByPayId(int payId) {
+    return paymentMapper.getCashPayByPayId(payId);
+  }
+
+  @Override
+  public CreditDebitPayEntry getCreditDebitPayByPayId(int payId) {
+    return paymentMapper.getCreditDebitPayByPayId(payId);
   }
 
 }

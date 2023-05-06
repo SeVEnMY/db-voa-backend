@@ -1,6 +1,8 @@
 package com.nqz.voa.controller;
 
 import com.nqz.voa.entry.AccountEntry;
+import com.nqz.voa.entry.CashPayEntry;
+import com.nqz.voa.entry.CreditDebitPayEntry;
 import com.nqz.voa.entry.PaymentEntry;
 import com.nqz.voa.helper.Result;
 import com.nqz.voa.service.AccountService;
@@ -116,5 +118,43 @@ public class PaymentController {
     int payId = helperService.getLastInsertedId();
     paymentService.addCreditDebitPay(payId, cdName, cdNum, cdExDate, cdCvv, cdCredit);
     return helperService.getLastInsertedId();
+  }
+
+  @RequestMapping(value = "/getcash", method = RequestMethod.GET)
+  public Result<CashPayEntry> getCashPayByPayId(@RequestParam int payId, HttpServletRequest request, HttpServletResponse response) {
+    Result<CashPayEntry> result = new Result<>();
+    // is login?
+    if (!accountController.isLogin(request, response).isSuccess()) {
+      result.setResultFailed("Not logged in！");
+      return result;
+    }
+
+    PaymentEntry paymentEntry = paymentService.findPaymentById(payId);
+    CashPayEntry cashPayEntry = paymentService.getCashPayByPayId(payId);
+    if (paymentEntry == null || cashPayEntry == null) {
+      result.setResultSuccess("Not Found!", null);
+      return result;
+    }
+    result.setResultSuccess("Success!", cashPayEntry);
+    return result;
+  }
+
+  @RequestMapping(value = "/getcd", method = RequestMethod.GET)
+  public Result<CreditDebitPayEntry> getCreditDebitPayByPayId(@RequestParam int payId, HttpServletRequest request, HttpServletResponse response) {
+    Result<CreditDebitPayEntry> result = new Result<>();
+    // is login?
+    if (!accountController.isLogin(request, response).isSuccess()) {
+      result.setResultFailed("Not logged in！");
+      return result;
+    }
+
+    PaymentEntry paymentEntry = paymentService.findPaymentById(payId);
+    CreditDebitPayEntry creditDebitPayEntry = paymentService.getCreditDebitPayByPayId(payId);
+    if (paymentEntry == null || creditDebitPayEntry == null) {
+      result.setResultSuccess("Not Found!", null);
+      return result;
+    }
+    result.setResultSuccess("Success!", creditDebitPayEntry);
+    return result;
   }
 }

@@ -1,5 +1,7 @@
 package com.nqz.voa.mapper;
 
+import com.nqz.voa.entry.CashPayEntry;
+import com.nqz.voa.entry.CreditDebitPayEntry;
 import com.nqz.voa.entry.PaymentEntry;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -29,4 +31,9 @@ public interface PaymentMapper {
           "VALUES (#{payId}, #{cdName}, #{cdNum}, str_to_date( #{cdExDate} , '%Y-%m-%d' ), #{cdCvv}, #{cdCredit})")
   int addCreditDebitPay(int payId, String cdName, String cdNum, String cdExDate, String cdCvv, String cdCredit);
 
+  @Select("SELECT * FROM nqz_cash WHERE pay_id = #{payId}")
+  CashPayEntry getCashPayByPayId(int payId);
+
+  @Select("SELECT * FROM nqz_credit_debit WHERE pay_id = #{payId}")
+  CreditDebitPayEntry getCreditDebitPayByPayId(int payId);
 }
