@@ -342,7 +342,7 @@ public class AccountController {
   public Result<AccountEntry> isLogin(HttpServletRequest request, HttpServletResponse response) {
     response.setHeader("Access-Control-Allow-Credentials", "ture");
     response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-    HttpSession session = request.getSession(false);
+    HttpSession session = request.getSession();
 
     Result<AccountEntry> result = new Result<>();
 
