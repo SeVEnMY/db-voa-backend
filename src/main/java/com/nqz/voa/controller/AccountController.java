@@ -3,15 +3,18 @@ package com.nqz.voa.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.nqz.voa.entry.*;
 import com.nqz.voa.helper.Result;
-import com.nqz.voa.service.VisitorService;
 import com.nqz.voa.service.AccountService;
+import com.nqz.voa.service.VisitorService;
 import io.swagger.annotations.Api;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.Period;
 
 @CrossOrigin
 @RestController
@@ -88,6 +91,29 @@ public class AccountController {
       profileEntry.setITimesVisit(individualVisitEntry.getI_times_visit());
     }
     result.setResultSuccess("Success!", profileEntry);
+    return result;
+  }
+
+  @RequestMapping(value = "/getage", method = RequestMethod.GET)
+  public Result<Integer> getAge(HttpServletRequest request, HttpServletResponse response) {
+    Result<Integer> result = new Result<>();
+
+    if (!this.isLogin(request, response).isSuccess()) {
+      result.setResultFailed("Not logged in!");
+      return result;
+    }
+
+    AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
+    String accEmail = sessionUser.getAcc_email();
+
+    AccountEntry accountEntry = accountService.findAccountByAccEmail(accEmail);
+    VisitorEntry visitorEntry = visitorService.findVisitorById(accountEntry.getV_id());
+    String vBirthDate = visitorEntry.getV_bdate();
+    String[] dateParts = vBirthDate.split(" ");
+    LocalDate date = LocalDate.parse(dateParts[0]);
+    LocalDate today = LocalDate.now();
+
+    result.setResultSuccess("Success!", Period.between(date, today).getYears());
     return result;
   }
 

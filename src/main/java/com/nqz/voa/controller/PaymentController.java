@@ -50,8 +50,25 @@ public class PaymentController {
     result.setResultSuccess("Success!", paymentService.findAllPayments());
     return result;
   }
-
   @RequestMapping(value = "/get", method = RequestMethod.GET)
+  public Result<PaymentEntry> findPaymentByPayId(@RequestParam int payId, HttpServletRequest request, HttpServletResponse response) {
+    Result<PaymentEntry> result = new Result<>();
+    // is login?
+    if (!accountController.isLogin(request, response).isSuccess()) {
+      result.setResultFailed("Not logged in！");
+      return result;
+    }
+
+    PaymentEntry paymentEntry = paymentService.findPaymentById(payId);
+    if (paymentEntry == null) {
+      result.setResultSuccess("Not Found!", null);
+      return result;
+    }
+    result.setResultSuccess("Success!", paymentEntry);
+    return result;
+  }
+
+  @RequestMapping(value = "/getbyorder", method = RequestMethod.GET)
   public Result<List<PaymentEntry>> findPaymentByOrderId(@RequestParam int oId, HttpServletRequest request, HttpServletResponse response) {
     Result<List<PaymentEntry>> result = new Result<>();
     // is login?
