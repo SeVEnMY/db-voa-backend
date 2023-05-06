@@ -14,8 +14,6 @@ public interface VisitorService {
 
     VisitorEntry findVisitorByEmail(String vEmail);
 
-    int findVisitorByInfo(String vFName, String vMName, String vLName, String vStAdd, String vCity, String vState, String vCountry, String vEmail, String vTelNum, String vType);
-
     int addGroupVisitor(int vId, int gSize);
 
     int addMemberVisitor(int vId, String mStartDate, String mEndDate, int mNumPurchased);

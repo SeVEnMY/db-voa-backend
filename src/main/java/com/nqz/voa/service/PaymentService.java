@@ -13,8 +13,6 @@ public interface PaymentService {
 
   int addNewPayment(String payTime, long payAmount, String payMethod);
 
-  Integer findPaymentByInfo(String payTime, long payAmount, String payMethod);
-
   int addCashPay(int payId, int caChange);
 
   int addCreditDebitPay(int payId, String cdName, String cdNum, String cdExDate, String cdCvv, String cdCredit);

@@ -4,6 +4,7 @@ import com.nqz.voa.entry.AccountEntry;
 import com.nqz.voa.entry.VisitorEntry;
 import com.nqz.voa.helper.Result;
 import com.nqz.voa.service.AccountService;
+import com.nqz.voa.service.HelperService;
 import com.nqz.voa.service.VisitorService;
 import io.swagger.annotations.Api;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,6 +30,9 @@ public class VisitorController {
 
     @Autowired
     private AccountService accountServie;
+
+    @Autowired
+    private HelperService helperService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public Result<List<VisitorEntry>> findAllVisitors(HttpServletRequest request, HttpServletResponse response) {
@@ -67,7 +71,7 @@ public class VisitorController {
                                @RequestParam int gSize) {
 
         visitorService.addVisitor(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType, vBDate);
-        int vId = visitorService.findVisitorByInfo(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType);
+        int vId = helperService.getLastInsertedId();
         return visitorService.addGroupVisitor(vId, gSize);
     }
 
@@ -88,7 +92,7 @@ public class VisitorController {
                                 @RequestParam int mNumPurchased) {
 
         visitorService.addVisitor(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType, vBDate);
-        int vId = visitorService.findVisitorByInfo(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType);
+        int vId = helperService.getLastInsertedId();
         return visitorService.addMemberVisitor(vId, mStartDate, mEndDate, mNumPurchased);
     }
 
@@ -107,7 +111,7 @@ public class VisitorController {
                                  @RequestParam String stuSchool) {
 
         visitorService.addVisitor(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType, vBDate);
-        int vId = visitorService.findVisitorByInfo(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType);
+        int vId = helperService.getLastInsertedId();
         return visitorService.addStudentVisitor(vId, stuSchool);
     }
 
@@ -126,7 +130,7 @@ public class VisitorController {
                                     @RequestParam int iTimesVisit) {
 
         visitorService.addVisitor(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType, vBDate);
-        int vId = visitorService.findVisitorByInfo(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType);
+        int vId = helperService.getLastInsertedId();
         return visitorService.addIndividualVisitor(vId, iTimesVisit);
     }
 }

@@ -23,10 +23,6 @@ public interface VisitorMapper {
     @Select("SELECT * FROM nqz_visitor WHERE v_email=#{vEmail}")
     VisitorEntry findVisitorByEmail(String vEmail);
 
-    @Select("SELECT v_id FROM nqz_visitor WHERE v_fname = #{vFName} AND v_mname = #{vMName} AND v_lname = #{vLName} AND v_stadd = #{vStAdd} AND v_city = #{vCity} AND v_state = #{vState} AND v_country = #{vCountry} AND v_email = #{vEmail} AND v_telnum = #{vTelNum} AND v_type = #{vType} " +
-            "LIMIT 1")
-    Integer findVisitorByInfo(String vFName, String vMName, String vLName, String vStAdd, String vCity, String vState, String vCountry, String vEmail, String vTelNum, String vType);
-
     @Insert("INSERT INTO nqz_group (v_id, g_size) VALUES (#{vId}, #{gSize});")
     int addGroupVisitor(int vId, int gSize);
 

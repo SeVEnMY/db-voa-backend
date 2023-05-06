@@ -22,9 +22,6 @@ public interface PaymentMapper {
   @Insert("INSERT INTO nqz_payment (pay_time, pay_amount, pay_method) VALUES (str_to_date( #{payTime} , '%Y-%m-%d %H:%i:%s' ), #{payAmount}, #{payMethod} ) ")
   int addNewPayment(String payTime, long payAmount, String payMethod);
 
-  @Select("SELECT pay_id FROM nqz_payment WHERE pay_time = #{payTime} AND pay_amount = #{payAmount} AND pay_method = #{payMethod}")
-  Integer findPaymentByInfo(String payTime, long payAmount, String payMethod);
-
   @Insert("INSERT INTO nqz_cash (pay_id, ca_change) VALUES (#{payId}, #{caChange})")
   int addCashPay(int payId, int caChange);
 

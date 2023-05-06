@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.nqz.voa.entry.*;
 import com.nqz.voa.helper.Result;
 import com.nqz.voa.service.AccountService;
+import com.nqz.voa.service.HelperService;
 import com.nqz.voa.service.VisitorService;
 import io.swagger.annotations.Api;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,8 +31,8 @@ public class AccountController {
   @Autowired
   private AccountService accountService;
 
-  public AccountController() {
-  }
+  @Autowired
+  private HelperService helperService;
 
   @RequestMapping(value = "/type", method = RequestMethod.GET)
   public Result<String> getVisitType(@RequestParam(value = "accEmail")String accEmail) {
@@ -144,7 +145,7 @@ public class AccountController {
       String vBDate = request.getVbDate();
 
       visitorService.addVisitor(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType, vBDate);
-      int vId = visitorService.findVisitorByInfo(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType);
+      int vId = helperService.getLastInsertedId();
       int gSize = request.getGsize();
       visitorService.addGroupVisitor(vId, gSize);
       accountService.Register(accEmail, accPwd, vId);
@@ -185,7 +186,7 @@ public class AccountController {
       String vBDate = request.getVbDate();
 
       visitorService.addVisitor(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType, vBDate);
-      int vId = visitorService.findVisitorByInfo(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType);
+      int vId = helperService.getLastInsertedId();
       String mStartDate = request.getMstartDate();
       String mEndDate = request.getMendDate();
       int mNumPurchased = request.getMnumPurchased();
@@ -228,7 +229,7 @@ public class AccountController {
       String vBDate = request.getVbDate();
 
       visitorService.addVisitor(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType, vBDate);
-      int vId = visitorService.findVisitorByInfo(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType);
+      int vId = helperService.getLastInsertedId();
       String stuSchool = request.getStuSchool();
       visitorService.addStudentVisitor(vId, stuSchool);
       accountService.Register(accEmail, accPwd, vId);
@@ -271,7 +272,7 @@ public class AccountController {
       String vBDate = request.getVbDate();
 
       visitorService.addVisitor(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType, vBDate);
-      int vId = visitorService.findVisitorByInfo(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType);
+      int vId = helperService.getLastInsertedId();
       int iTimesVisit = request.getItimesVisit();
       visitorService.addIndividualVisitor(vId, iTimesVisit);
       accountService.Register(accEmail, accPwd, vId);

@@ -35,11 +35,6 @@ public class VisitorServiceImpl implements VisitorService {
     }
 
     @Override
-    public int findVisitorByInfo(String vFName, String vMName, String vLName, String vStAdd, String vCity, String vState, String vCountry, String vEmail, String vTelNum, String vType) {
-        return visitorMapper.findVisitorByInfo(vFName, vMName, vLName, vStAdd, vCity, vState, vCountry, vEmail, vTelNum, vType);
-    }
-
-    @Override
     public int addGroupVisitor(int vId, int gSize) {
         return visitorMapper.addGroupVisitor(vId, gSize);
     }

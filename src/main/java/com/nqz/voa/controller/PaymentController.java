@@ -4,6 +4,7 @@ import com.nqz.voa.entry.AccountEntry;
 import com.nqz.voa.entry.PaymentEntry;
 import com.nqz.voa.helper.Result;
 import com.nqz.voa.service.AccountService;
+import com.nqz.voa.service.HelperService;
 import com.nqz.voa.service.PaymentService;
 import io.swagger.annotations.Api;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,6 +30,9 @@ public class PaymentController {
 
   @Autowired
   private AccountController accountController;
+
+  @Autowired
+  private HelperService helperService;
 
   @RequestMapping(value = "/list", method = RequestMethod.GET)
   public Result<List<PaymentEntry>> findAllPayments(HttpServletRequest request, HttpServletResponse response) {
@@ -93,8 +97,9 @@ public class PaymentController {
                             @RequestParam int caChange) {
 
     paymentService.addNewPayment(payTime, payAmount, payMethod);
-    int payId = paymentService.findPaymentByInfo(payTime, payAmount, payMethod);
-    return paymentService.addCashPay(payId, caChange);
+    int payId = helperService.getLastInsertedId();
+    paymentService.addCashPay(payId, caChange);
+    return helperService.getLastInsertedId();
   }
 
   @RequestMapping(value = "/addcd", method = RequestMethod.POST)
@@ -108,7 +113,8 @@ public class PaymentController {
                                @RequestParam String cdCredit) {
 
     paymentService.addNewPayment(payTime, payAmount, payMethod);
-    int payId = paymentService.findPaymentByInfo(payTime, payAmount, payMethod);
-    return paymentService.addCreditDebitPay(payId, cdName, cdNum, cdExDate, cdCvv, cdCredit);
+    int payId = helperService.getLastInsertedId();
+    paymentService.addCreditDebitPay(payId, cdName, cdNum, cdExDate, cdCvv, cdCredit);
+    return helperService.getLastInsertedId();
   }
 }
