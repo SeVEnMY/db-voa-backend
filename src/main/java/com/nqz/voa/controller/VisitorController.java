@@ -1,6 +1,8 @@
 package com.nqz.voa.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.nqz.voa.entry.AccountEntry;
+import com.nqz.voa.entry.MemberVisitEntry;
 import com.nqz.voa.entry.VisitorEntry;
 import com.nqz.voa.helper.Result;
 import com.nqz.voa.service.AccountService;
@@ -133,4 +135,34 @@ public class VisitorController {
         int vId = helperService.getLastInsertedId();
         return visitorService.addIndividualVisitor(vId, iTimesVisit);
     }
+
+    @RequestMapping(value = "/updatenumberp", method = RequestMethod.PUT)
+    public Object payTicket(@RequestParam int vId, @RequestParam int mNumPurchased,
+                            HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        // is login?
+        if (!accountController.isLogin(request, response).isSuccess()) {
+            json.put("message", "Not logged in!");
+            json.put("success", false);
+            json.put("data", null);
+            return json;
+        }
+
+        if (vId < 0 || mNumPurchased < 0) {
+            json.put("message", "Error invalid variables");
+            return json;
+        }
+
+        MemberVisitEntry memberVisitEntry = visitorService.findMemberVisitById(vId);
+        if (memberVisitEntry == null) {
+            json.put("message", String.format("Error no such member visitor, vId=%s", vId));
+            return json;
+        }
+
+        visitorService.updateNumPurchased(vId, mNumPurchased);
+        json.put("message", "Success!");
+        return json;
+    }
+
 }

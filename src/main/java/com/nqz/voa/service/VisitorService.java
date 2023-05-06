@@ -30,4 +30,6 @@ public interface VisitorService {
 
     IndividualVisitEntry findIndiVisitById(int vId);
 
+    void updateNumPurchased(int vId, int mNumPurchased);
+
 }

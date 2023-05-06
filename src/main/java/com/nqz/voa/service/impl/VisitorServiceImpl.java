@@ -73,4 +73,9 @@ public class VisitorServiceImpl implements VisitorService {
     public IndividualVisitEntry findIndiVisitById(int vId) {
         return visitorMapper.findIndiVisitById(vId);
     }
+
+    @Override
+    public void updateNumPurchased(int vId, int mNumPurchased) {
+        visitorMapper.updateNumPurchased(vId, mNumPurchased);
+    }
 }

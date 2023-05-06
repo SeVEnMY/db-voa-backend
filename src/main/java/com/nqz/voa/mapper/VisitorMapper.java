@@ -48,4 +48,7 @@ public interface VisitorMapper {
     @Select("SELECT * FROM nqz_individual WHERE v_id = #{vId}")
     IndividualVisitEntry findIndiVisitById(int vId);
 
+    @Select("update nqz_member set m_num_purchased = #{mNumPurchased} where v_id = #{vId}")
+    void updateNumPurchased(int vId, int mNumPurchased);
+
 }
