@@ -342,9 +342,11 @@ public class AccountController {
   public Result<AccountEntry> isLogin(HttpServletRequest request, HttpServletResponse response) {
     response.setHeader("Access-Control-Allow-Credentials", "ture");
     response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-    HttpSession session = request.getSession();
+    HttpSession session = request.getSession(false);
 
     Result<AccountEntry> result = new Result<>();
+
+    System.out.println(session.getAttribute(SESSION_NAME));
 
     AccountEntry sessionUser = (AccountEntry) session.getAttribute(SESSION_NAME);
 
@@ -408,7 +410,6 @@ public class AccountController {
   @RequestMapping(value = "/getrole", method = RequestMethod.GET)
   public Result<String> getCookieRole(HttpServletRequest request, HttpServletResponse response) {
     Result<String> result = new Result<>();
-    HttpSession session = request.getSession();
 
     if (!this.isLogin(request, response).isSuccess()) {
       result.setResultFailed("Not logged in！");

@@ -28,23 +28,23 @@ public class AccountServiceImpl implements AccountService {
   @Override
   public Result<AccountEntry> login(LoginRequestEntry loginRequest) {
     Result<AccountEntry> result = new Result<>();
-    AccountEntry getAccount = null;
+    AccountEntry accountEntry = null;
 
     try {
-      getAccount = accountMapper.findAccountByAccEmail(loginRequest.getAccEmail());
+      accountEntry = accountMapper.findAccountByAccEmail(loginRequest.getAccEmail());
     } catch (Exception e) {
       e.printStackTrace();
     }
 
-    if (getAccount == null) {
+    if (accountEntry == null) {
       result.setResultFailed("Account does not exist!");
       return result;
     }
-    if (!getAccount.getAcc_pwd().equals(DigestUtils.md5Hex(loginRequest.getAccPwd()))) {
+    if (!accountEntry.getAcc_pwd().equals(DigestUtils.md5Hex(loginRequest.getAccPwd()))) {
       result.setResultFailed("Account email or password does not match!");
       return result;
     }
-    result.setResultSuccess("Login successfully!", getAccount);
+    result.setResultSuccess("Login successfully!", accountEntry);
     return result;
   }
 
