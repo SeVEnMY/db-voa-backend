@@ -118,6 +118,25 @@ public class AccountController {
     return result;
   }
 
+  @RequestMapping(value = "/gettype", method = RequestMethod.GET)
+  public Result<String> getType(HttpServletRequest request, HttpServletResponse response) {
+    Result<String> result = new Result<>();
+
+    if (!this.isLogin(request, response).isSuccess()) {
+      result.setResultFailed("Not logged in!");
+      return result;
+    }
+
+    AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
+    String accEmail = sessionUser.getAcc_email();
+
+    AccountEntry accountEntry = accountService.findAccountByAccEmail(accEmail);
+    VisitorEntry visitorEntry = visitorService.findVisitorById(accountEntry.getV_id());
+
+    result.setResultSuccess("Success!", visitorEntry.getV_type());
+    return result;
+  }
+
   @RequestMapping(value = "/group/register", method = RequestMethod.POST)
   public Object groupRegister(@RequestBody GroupRegisterRequestEntry request) {
     String accEmail = request.getAccEmail();
