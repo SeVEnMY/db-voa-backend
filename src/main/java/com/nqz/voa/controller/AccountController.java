@@ -137,6 +137,24 @@ public class AccountController {
     return result;
   }
 
+  @RequestMapping(value = "/getid", method = RequestMethod.GET)
+  public Result<Integer> getVId(HttpServletRequest request, HttpServletResponse response) {
+    Result<Integer> result = new Result<>();
+
+    if (!this.isLogin(request, response).isSuccess()) {
+      result.setResultFailed("Not logged in!");
+      return result;
+    }
+
+    AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
+    String accEmail = sessionUser.getAcc_email();
+
+    AccountEntry accountEntry = accountService.findAccountByAccEmail(accEmail);
+
+    result.setResultSuccess("Success!", accountEntry.getV_id());
+    return result;
+  }
+
   @RequestMapping(value = "/group/register", method = RequestMethod.POST)
   public Object groupRegister(@RequestBody GroupRegisterRequestEntry request) {
     String accEmail = request.getAccEmail();
