@@ -27,4 +27,14 @@ public interface StoreService {
   int addMenuItem(String miName, int miUnitPrice);
 
   int addMenuItemToStore(int stId, int miId);
+
+  int getFoodStallCount();
+
+  int getIceCreamParlorCount();
+
+  int getRestaurantCount();
+
+  int getGiftShopCount();
+
+  int getApparelsCount();
 }

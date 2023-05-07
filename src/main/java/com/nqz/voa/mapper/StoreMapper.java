@@ -45,4 +45,19 @@ public interface StoreMapper {
           "VALUES (#{stId}, #{miId);")
   int addMenuItemToStore(int stId, int miId);
 
+  @Select("SELECT COUNT(*) FROM nqz_store WHERE ctg_id = 1")
+  int getFoodStallCount();
+
+  @Select("SELECT COUNT(*) FROM nqz_store WHERE ctg_id = 2")
+  int getIceCreamParlorCount();
+
+  @Select("SELECT COUNT(*) FROM nqz_store WHERE ctg_id = 3")
+  int getRestaurantCount();
+
+  @Select("SELECT COUNT(*) FROM nqz_store WHERE ctg_id = 4")
+  int getGiftShopCount();
+
+  @Select("SELECT COUNT(*) FROM nqz_store WHERE ctg_id = 5")
+  int getApparelsCount();
+
 }

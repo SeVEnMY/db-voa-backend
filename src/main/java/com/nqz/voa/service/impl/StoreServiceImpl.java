@@ -65,4 +65,29 @@ public class StoreServiceImpl implements StoreService {
   public int addMenuItemToStore(int stId, int miId) {
     return storeMapper.addMenuItemToStore(stId, miId);
   }
+
+  @Override
+  public int getFoodStallCount() {
+    return storeMapper.getFoodStallCount();
+  }
+
+  @Override
+  public int getIceCreamParlorCount() {
+    return storeMapper.getIceCreamParlorCount();
+  }
+
+  @Override
+  public int getRestaurantCount() {
+    return storeMapper.getRestaurantCount();
+  }
+
+  @Override
+  public int getGiftShopCount() {
+    return storeMapper.getGiftShopCount();
+  }
+
+  @Override
+  public int getApparelsCount() {
+    return storeMapper.getApparelsCount();
+  }
 }

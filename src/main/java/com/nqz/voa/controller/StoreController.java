@@ -1,5 +1,6 @@
 package com.nqz.voa.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.nqz.voa.entry.*;
 import com.nqz.voa.helper.Result;
 import com.nqz.voa.service.AccountService;
@@ -174,6 +175,34 @@ public class StoreController {
     }
 
     return storeService.addMenuItemToStore(stId, miId);
+  }
+
+  @RequestMapping(value = "/count", method = RequestMethod.GET)
+  public Object getStoreCount(HttpServletRequest request, HttpServletResponse response) {
+    JSONObject json = new JSONObject();
+
+    if (!accountController.isLogin(request, response).isSuccess()) {
+      json.put("message", "Not logged in!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
+    String accEmail = sessionUser.getAcc_email();
+    if (!accountService.isAdmin(accEmail)) {
+      json.put("message", "No permission!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    json.put("foodstall", storeService.getFoodStallCount());
+    json.put("icecreamparlor", storeService.getIceCreamParlorCount());
+    json.put("restaurant", storeService.getRestaurantCount());
+    json.put("giftshop", storeService.getGiftShopCount());
+    json.put("apparels", storeService.getApparelsCount());
+    return json;
   }
 
 }
