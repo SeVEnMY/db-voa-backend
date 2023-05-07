@@ -27,4 +27,19 @@ public interface ShowMapper {
   @Insert("INSERT INTO nqz_sh_type (shtype_name) VALUES (#{shTypeName})")
   int addShowType(String shTypeName);
 
+  @Select("SELECT COUNT(*) FROM nqz_show WHERE shtype_id = 1")
+  int getDramaCount();
+
+  @Select("SELECT COUNT(*) FROM nqz_show WHERE shtype_id = 2")
+  int getMusicalCount();
+
+  @Select("SELECT COUNT(*) FROM nqz_show WHERE shtype_id = 3")
+  int getComedyCount();
+
+  @Select("SELECT COUNT(*) FROM nqz_show WHERE shtype_id = 4")
+  int getHorrorCount();
+
+  @Select("SELECT COUNT(*) FROM nqz_show WHERE shtype_id = 5")
+  int getAdventureCount();
+
 }

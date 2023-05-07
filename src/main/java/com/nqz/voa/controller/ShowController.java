@@ -1,5 +1,6 @@
 package com.nqz.voa.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.nqz.voa.entry.AccountEntry;
 import com.nqz.voa.entry.ShowEntry;
 import com.nqz.voa.entry.ShowTypeEntry;
@@ -104,6 +105,34 @@ public class ShowController {
     }
 
     return showService.addShowType(shTypeName);
+  }
+
+  @RequestMapping(value = "/count", method = RequestMethod.GET)
+  public Object getShowCount(HttpServletRequest request, HttpServletResponse response) {
+    JSONObject json = new JSONObject();
+
+    if (!accountController.isLogin(request, response).isSuccess()) {
+      json.put("message", "Not logged in!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
+    String accEmail = sessionUser.getAcc_email();
+    if (!accountService.isAdmin(accEmail)) {
+      json.put("message", "No permission!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    json.put("drama", showService.getDramaCount());
+    json.put("musical", showService.getMusicalCount());
+    json.put("comedy", showService.getComedyCount());
+    json.put("horror", showService.getHorrorCount());
+    json.put("adventure", showService.getAdventureCount());
+    return json;
   }
 
 }

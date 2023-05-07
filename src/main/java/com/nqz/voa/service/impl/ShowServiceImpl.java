@@ -39,4 +39,29 @@ public class ShowServiceImpl implements ShowService {
   public int addShowType(String shTypeName) {
     return showMapper.addShowType(shTypeName);
   }
+
+  @Override
+  public int getDramaCount() {
+    return showMapper.getDramaCount();
+  }
+
+  @Override
+  public int getMusicalCount() {
+    return showMapper.getMusicalCount();
+  }
+
+  @Override
+  public int getComedyCount() {
+    return showMapper.getComedyCount();
+  }
+
+  @Override
+  public int getHorrorCount() {
+    return showMapper.getHorrorCount();
+  }
+
+  @Override
+  public int getAdventureCount() {
+    return showMapper.getAdventureCount();
+  }
 }

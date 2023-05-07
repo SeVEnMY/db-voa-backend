@@ -15,4 +15,14 @@ public interface ShowService {
   List<ShowTypeEntry> findAllShowTypes();
 
   int addShowType(String shTypeName);
+
+  int getDramaCount();
+
+  int getMusicalCount();
+
+  int getComedyCount();
+
+  int getHorrorCount();
+
+  int getAdventureCount();
 }
