@@ -47,7 +47,7 @@ public class AttractionController {
                            @RequestParam String attDescription,
                            @RequestParam String attStatus,
                            @RequestParam int attCapacity,
-                           @RequestParam int attMinimumHeight,
+                           @RequestParam(required = false) int attMinimumHeight,
                            @RequestParam int attDurationTime,
                            @RequestParam int lsId,
                            @RequestParam int attTypeId) {
