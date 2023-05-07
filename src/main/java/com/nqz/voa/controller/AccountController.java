@@ -340,13 +340,11 @@ public class AccountController {
 
   @RequestMapping(value = "/islogin", method = RequestMethod.GET)
   public Result<AccountEntry> isLogin(HttpServletRequest request, HttpServletResponse response) {
-    response.setHeader("Access-Control-Allow-Credentials", "ture");
-    response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+//    response.setHeader("Access-Control-Allow-Credentials", "ture");
+//    response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
     HttpSession session = request.getSession();
 
     Result<AccountEntry> result = new Result<>();
-
-    System.out.println(session.getAttribute(SESSION_NAME));
 
     AccountEntry sessionUser = (AccountEntry) session.getAttribute(SESSION_NAME);
 
@@ -375,8 +373,8 @@ public class AccountController {
     Result result = new Result();
     request.getSession().setAttribute(SESSION_NAME, null);
     result.setResultSuccess("Successfully logged out!", null);
-    response.setHeader("Access-Control-Allow-Credentials", "ture");
-    response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+//    response.setHeader("Access-Control-Allow-Credentials", "ture");
+//    response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
     return result;
   }
 
