@@ -32,4 +32,12 @@ public interface VisitorService {
 
     void updateNumPurchased(int vId, int mNumPurchased);
 
+    int getGroupCount();
+
+    int getMemberCount();
+
+    int getStudentCount();
+
+    int getIndividualCount();
+
 }

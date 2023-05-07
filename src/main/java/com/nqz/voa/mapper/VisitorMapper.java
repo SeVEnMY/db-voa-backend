@@ -48,7 +48,19 @@ public interface VisitorMapper {
     @Select("SELECT * FROM nqz_individual WHERE v_id = #{vId}")
     IndividualVisitEntry findIndiVisitById(int vId);
 
-        @Select("update nqz_member set m_num_purchased = #{mNumPurchased} where v_id = #{vId}")
+    @Select("UPDATE nqz_member SET m_num_purchased = #{mNumPurchased} WHERE v_id = #{vId}")
     void updateNumPurchased(int vId, int mNumPurchased);
+
+    @Select("SELECT COUNT(*) FROM nqz_group")
+    int getGroupCount();
+
+    @Select("SELECT COUNT(*) FROM nqz_member")
+    int getMemberCount();
+
+    @Select("SELECT COUNT(*) FROM nqz_student")
+    int getStudentCount();
+
+    @Select("SELECT COUNT(*) FROM nqz_individual")
+    int getIndividualCount();
 
 }

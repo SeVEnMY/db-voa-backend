@@ -78,4 +78,24 @@ public class VisitorServiceImpl implements VisitorService {
     public void updateNumPurchased(int vId, int mNumPurchased) {
         visitorMapper.updateNumPurchased(vId, mNumPurchased);
     }
+
+    @Override
+    public int getGroupCount() {
+        return visitorMapper.getGroupCount();
+    }
+
+    @Override
+    public int getMemberCount() {
+        return visitorMapper.getMemberCount();
+    }
+
+    @Override
+    public int getStudentCount() {
+        return visitorMapper.getStudentCount();
+    }
+
+    @Override
+    public int getIndividualCount() {
+        return visitorMapper.getIndividualCount();
+    }
 }

@@ -165,4 +165,31 @@ public class VisitorController {
         return json;
     }
 
+    @RequestMapping(value = "/count", method = RequestMethod.GET)
+    public Object getVisitorCount(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        if (!accountController.isLogin(request, response).isSuccess()) {
+            json.put("message", "Not logged in!");
+            json.put("success", false);
+            json.put("data", null);
+            return json;
+        }
+
+        AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
+        String accEmail = sessionUser.getAcc_email();
+        if (!accountServie.isAdmin(accEmail)) {
+            json.put("message", "No permission!");
+            json.put("success", false);
+            json.put("data", null);
+            return json;
+        }
+
+        json.put("group", visitorService.getGroupCount());
+        json.put("member", visitorService.getMemberCount());
+        json.put("student", visitorService.getStudentCount());
+        json.put("individual", visitorService.getIndividualCount());
+        return json;
+    }
+
 }
