@@ -39,4 +39,24 @@ public class ParkingServiceImpl implements ParkingService {
     return parkingMapper.addParkingLot(plName);
   }
 
+  @Override
+  public int getParkingLotACount() {
+    return parkingMapper.getParkingLotACount();
+  }
+
+  @Override
+  public int getParkingLotBCount() {
+    return parkingMapper.getParkingLotBCount();
+  }
+
+  @Override
+  public int getParkingLotCCount() {
+    return parkingMapper.getParkingLotCCount();
+  }
+
+  @Override
+  public int getPremiumLotCount() {
+    return parkingMapper.getPremiumLotCount();
+  }
+
 }

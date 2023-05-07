@@ -6,8 +6,10 @@ import com.nqz.voa.entry.AccountEntry;
 import com.nqz.voa.entry.OrderEntry;
 import com.nqz.voa.entry.PaymentEntry;
 import com.nqz.voa.helper.Result;
-import com.nqz.voa.mapper.HelperMapper;
-import com.nqz.voa.service.*;
+import com.nqz.voa.service.AccountService;
+import com.nqz.voa.service.HelperService;
+import com.nqz.voa.service.OrderService;
+import com.nqz.voa.service.PaymentService;
 import io.swagger.annotations.Api;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -190,6 +192,33 @@ public class OrderController {
 
     orderService.updatePayId(oId, payId);
     json.put("message", "Success!");
+    return json;
+  }
+
+  @RequestMapping(value = "/count", method = RequestMethod.GET)
+  public Object getOrderCount(HttpServletRequest request, HttpServletResponse response) {
+    JSONObject json = new JSONObject();
+
+    if (!accountController.isLogin(request, response).isSuccess()) {
+      json.put("message", "Not logged in!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
+    String accEmail = sessionUser.getAcc_email();
+    if (!accountService.isAdmin(accEmail)) {
+      json.put("message", "No permission!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    json.put("show", orderService.getShowOrderCount());
+    json.put("store", orderService.getStoreOrderCount());
+    json.put("ticket", orderService.getTicketOrderCount());
+    json.put("parking", orderService.getParkOrderCount());
     return json;
   }
 

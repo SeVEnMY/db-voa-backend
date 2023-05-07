@@ -16,4 +16,12 @@ public interface ParkingService {
   List<ParkingLotEntry> findAllParkingLots();
 
   int addParkingLot(String plName);
+
+  int getParkingLotACount();
+
+  int getParkingLotBCount();
+
+  int getParkingLotCCount();
+
+  int getPremiumLotCount();
 }

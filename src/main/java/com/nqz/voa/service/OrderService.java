@@ -17,4 +17,12 @@ public interface OrderService {
 
   void updatePayId(int oId, Integer payId);
 
+  int getShowOrderCount();
+
+  int getStoreOrderCount();
+
+  int getTicketOrderCount();
+
+  int getParkOrderCount();
+
 }

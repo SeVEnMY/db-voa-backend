@@ -1,5 +1,6 @@
 package com.nqz.voa.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.nqz.voa.entry.AccountEntry;
 import com.nqz.voa.entry.ParkingEntry;
 import com.nqz.voa.entry.ParkingLotEntry;
@@ -86,22 +87,31 @@ public class ParkingController {
     return result;
   }
 
-  @RequestMapping(value = "/addpl", method = RequestMethod.POST)
-  public int addParkingLot(@RequestParam String plName, HttpServletRequest request, HttpServletResponse response) {
+  @RequestMapping(value = "/count", method = RequestMethod.GET)
+  public Object getParkingCount(HttpServletRequest request, HttpServletResponse response) {
+    JSONObject json = new JSONObject();
+
     if (!accountController.isLogin(request, response).isSuccess()) {
-      response.setStatus(403);
-      return -1;
+      json.put("message", "Not logged in!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
     }
 
-    // get user account name
     AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
     String accEmail = sessionUser.getAcc_email();
     if (!accountService.isAdmin(accEmail)) {
-      response.setStatus(403);
-      return -1;
+      json.put("message", "No permission!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
     }
 
-    return parkingService.addParkingLot(plName);
+    json.put("parkinglota", parkingService.getParkingLotACount());
+    json.put("parkinglotb", parkingService.getParkingLotBCount());
+    json.put("parkinglotc", parkingService.getParkingLotCCount());
+    json.put("premiumlot", parkingService.getPremiumLotCount());
+    return json;
   }
 
 }

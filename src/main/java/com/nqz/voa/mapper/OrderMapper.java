@@ -29,4 +29,16 @@ public interface OrderMapper {
   @Select("update nqz_order set pay_id = #{payId} where o_id = #{oId}")
   void updatePayId(int oId, Integer payId);
 
+  @Select("SELECT COUNT(*) FROM nqz_order WHERE sh_id IS NOT NULL")
+  int getShowOrderCount();
+
+  @Select("SELECT COUNT(*) FROM nqz_order WHERE st_id IS NOT NULL")
+  int getStoreOrderCount();
+
+  @Select("SELECT COUNT(*) FROM nqz_order WHERE tkt_id IS NOT NULL")
+  int getTicketOrderCount();
+
+  @Select("SELECT COUNT(*) FROM nqz_order WHERE park_id IS NOT NULL")
+  int getParkOrderCount();
+
 }

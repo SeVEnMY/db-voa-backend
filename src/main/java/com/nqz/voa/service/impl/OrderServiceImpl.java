@@ -44,4 +44,24 @@ public class OrderServiceImpl implements OrderService {
     orderMapper.updatePayId(oId, payId);
   }
 
+  @Override
+  public int getShowOrderCount() {
+    return orderMapper.getShowOrderCount();
+  }
+
+  @Override
+  public int getStoreOrderCount() {
+    return orderMapper.getStoreOrderCount();
+  }
+
+  @Override
+  public int getTicketOrderCount() {
+    return orderMapper.getTicketOrderCount();
+  }
+
+  @Override
+  public int getParkOrderCount() {
+    return orderMapper.getParkOrderCount();
+  }
+
 }

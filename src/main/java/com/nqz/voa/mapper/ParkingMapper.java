@@ -27,4 +27,16 @@ public interface ParkingMapper {
   @Insert("INSERT INTO nqz_parking_lot (pl_name) VALUES ('Parking Lot A')")
   int addParkingLot(String plName);
 
+  @Select("SELECT COUNT(*) FROM nqz_parking WHERE pl_id = 1")
+  int getParkingLotACount();
+
+  @Select("SELECT COUNT(*) FROM nqz_parking WHERE pl_id = 2")
+  int getParkingLotBCount();
+
+  @Select("SELECT COUNT(*) FROM nqz_parking WHERE pl_id = 3")
+  int getParkingLotCCount();
+
+  @Select("SELECT COUNT(*) FROM nqz_parking WHERE pl_id = 4")
+  int getPremiumLotCount();
+
 }
