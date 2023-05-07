@@ -31,7 +31,7 @@ public class VisitorController {
     private AccountController accountController;
 
     @Autowired
-    private AccountService accountServie;
+    private AccountService accountService;
 
     @Autowired
     private HelperService helperService;
@@ -48,7 +48,7 @@ public class VisitorController {
 
         AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
         String accEmail = sessionUser.getAcc_email();
-        if (!accountServie.isAdmin(accEmail)) {
+        if (!accountService.isAdmin(accEmail)) {
             result.setResultFailed("No Permission!");
             return result;
         }
@@ -178,7 +178,7 @@ public class VisitorController {
 
         AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
         String accEmail = sessionUser.getAcc_email();
-        if (!accountServie.isAdmin(accEmail)) {
+        if (!accountService.isAdmin(accEmail)) {
             json.put("message", "No permission!");
             json.put("success", false);
             json.put("data", null);

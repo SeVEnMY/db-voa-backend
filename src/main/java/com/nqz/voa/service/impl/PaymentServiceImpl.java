@@ -56,4 +56,14 @@ public class PaymentServiceImpl implements PaymentService {
     return paymentMapper.getCreditDebitPayByPayId(payId);
   }
 
+  @Override
+  public int getCashCount() {
+    return paymentMapper.getCashCount();
+  }
+
+  @Override
+  public int getCreditDebitCount() {
+    return paymentMapper.getCreditDebitCount();
+  }
+
 }

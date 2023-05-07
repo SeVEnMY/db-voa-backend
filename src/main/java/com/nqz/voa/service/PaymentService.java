@@ -24,4 +24,8 @@ public interface PaymentService {
 
   CreditDebitPayEntry getCreditDebitPayByPayId(int payId);
 
+  int getCashCount();
+
+  int getCreditDebitCount();
+
 }

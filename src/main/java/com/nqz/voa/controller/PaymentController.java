@@ -1,5 +1,6 @@
 package com.nqz.voa.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.nqz.voa.entry.AccountEntry;
 import com.nqz.voa.entry.CashPayEntry;
 import com.nqz.voa.entry.CreditDebitPayEntry;
@@ -156,5 +157,30 @@ public class PaymentController {
     }
     result.setResultSuccess("Success!", creditDebitPayEntry);
     return result;
+  }
+
+  @RequestMapping(value = "/count", method = RequestMethod.GET)
+  public Object getPaymentCount(HttpServletRequest request, HttpServletResponse response) {
+    JSONObject json = new JSONObject();
+
+    if (!accountController.isLogin(request, response).isSuccess()) {
+      json.put("message", "Not logged in!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
+    String accEmail = sessionUser.getAcc_email();
+    if (!accountService.isAdmin(accEmail)) {
+      json.put("message", "No permission!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    json.put("cash", paymentService.getCashCount());
+    json.put("creditdebit", paymentService.getCreditDebitCount());
+    return json;
   }
 }

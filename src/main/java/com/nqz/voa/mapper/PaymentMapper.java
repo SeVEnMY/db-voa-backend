@@ -36,4 +36,11 @@ public interface PaymentMapper {
 
   @Select("SELECT * FROM nqz_credit_debit WHERE pay_id = #{payId}")
   CreditDebitPayEntry getCreditDebitPayByPayId(int payId);
+
+  @Select("SELECT COUNT(*) FROM nqz_cash")
+  int getCashCount();
+
+  @Select("SELECT COUNT(*) FROM nqz_credit_debit")
+  int getCreditDebitCount();
+
 }
