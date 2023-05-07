@@ -1,9 +1,10 @@
 package com.nqz.voa.mapper;
 
-import com.nqz.voa.entry.AttractionEntry;
 import com.nqz.voa.entry.TicketEntry;
 import com.nqz.voa.entry.TicketTypeEntry;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -31,4 +32,14 @@ public interface TicketMapper {
 
   @Select("update nqz_ticket set tkt_ispaid = '1' where tkt_id = #{tktId}")
   void payTicket(int tktId);
+
+  @Select("SELECT COUNT(*) FROM nqz_ticket WHERE tkttype_id = 1")
+  int getChildCount();
+
+  @Select("SELECT COUNT(*) FROM nqz_ticket WHERE tkttype_id = 2")
+  int getAdultCount();
+
+  @Select("SELECT COUNT(*) FROM nqz_ticket WHERE tkttype_id = 3")
+  int getSeniorCount();
+
 }

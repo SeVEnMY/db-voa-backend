@@ -49,4 +49,19 @@ public class TicketServiceImpl implements TicketService {
   public void payTicket(int tktId) {
     ticketMapper.payTicket(tktId);
   }
+
+  @Override
+  public int getChildCount() {
+    return ticketMapper.getChildCount();
+  }
+
+  @Override
+  public int getAdultCount() {
+    return ticketMapper.getAdultCount();
+  }
+
+  @Override
+  public int getSeniorCount() {
+    return ticketMapper.getSeniorCount();
+  }
 }

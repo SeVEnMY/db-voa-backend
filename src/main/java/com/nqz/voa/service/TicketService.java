@@ -20,4 +20,10 @@ public interface TicketService {
   int addAttractionToTicket(int tktId, int attId, String tktAttTime);
 
   void payTicket(int tktId);
+
+  int getChildCount();
+
+  int getAdultCount();
+
+  int getSeniorCount();
 }

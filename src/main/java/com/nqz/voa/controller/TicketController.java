@@ -168,4 +168,30 @@ public class TicketController {
     return json;
   }
 
+  @RequestMapping(value = "/count", method = RequestMethod.GET)
+  public Object getTicketCount(HttpServletRequest request, HttpServletResponse response) {
+    JSONObject json = new JSONObject();
+
+    if (!accountController.isLogin(request, response).isSuccess()) {
+      json.put("message", "Not logged in!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
+    String accEmail = sessionUser.getAcc_email();
+    if (!accountService.isAdmin(accEmail)) {
+      json.put("message", "No permission!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    json.put("child", ticketService.getChildCount());
+    json.put("adult", ticketService.getAdultCount());
+    json.put("senior", ticketService.getSeniorCount());
+    return json;
+  }
+
 }
