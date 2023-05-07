@@ -56,4 +56,29 @@ public class AttractionServiceImpl implements AttractionService {
     return attractionMapper.findAttractionByTicketId(tktId);
   }
 
+  @Override
+  public int getRollerCoasterCount() {
+    return attractionMapper.getRollerCoasterCount();
+  }
+
+  @Override
+  public int getWaterRideCount() {
+    return attractionMapper.getWaterRideCount();
+  }
+
+  @Override
+  public int getDarkRideCount() {
+    return attractionMapper.getDarkRideCount();
+  }
+
+  @Override
+  public int getKidRideCount() {
+    return attractionMapper.getKidRideCount();
+  }
+
+  @Override
+  public int getVrRideCount() {
+    return attractionMapper.getVrRideCount();
+  }
+
 }

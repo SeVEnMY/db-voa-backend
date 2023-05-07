@@ -22,4 +22,14 @@ public interface AttractionService {
   int addLocationSection(String lsName);
 
   List<AttractionEntry> findAttractionByTicketId(int tktId);
+
+  int getRollerCoasterCount();
+
+  int getWaterRideCount();
+
+  int getDarkRideCount();
+
+  int getKidRideCount();
+
+  int getVrRideCount();
 }
