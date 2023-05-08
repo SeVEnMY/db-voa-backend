@@ -16,13 +16,10 @@ public class SessionConfig {
   public CookieSerializer cookieSerializer() {
     DefaultCookieSerializer serializer = new DefaultCookieSerializer();
     serializer.setCookieName("JSESSIONID");
-    // match localhost、127.0.0.1 ...
     serializer.setDomainNamePattern("^.+?\\\\.(\\\\w+\\\\.[a-z]+)$");
-    // root for cookie
     serializer.setCookiePath("/");
-    // set if only server could change it
     serializer.setUseHttpOnlyCookie(false);
-    // set the life time for cookie
+    // set the lifetime for cookie
     serializer.setCookieMaxAge(60*60*2);
     return serializer;
   }
