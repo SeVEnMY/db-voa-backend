@@ -11,7 +11,7 @@ public interface AttractionService {
 
   AttractionEntry findAttractionById(int attId);
 
-  int addAttraction(String attName, String attDescription, String attStatus, int attCapacity, int attMinimumHeight, int attDurationTime, int lsId, int attTypeId);
+  int addAttraction(String attName, String attDescription, String attStatus, int attCapacity, Integer attMinimumHeight, int attDurationTime, int lsId, int attTypeId);
 
   List<AttractionTypeEntry> findAllAttractionTypes();
 

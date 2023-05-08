@@ -27,7 +27,7 @@ public class AttractionServiceImpl implements AttractionService {
   }
 
   @Override
-  public int addAttraction(String attName, String attDescription, String attStatus, int attCapacity, int attMinimumHeight, int attDurationTime, int lsId, int attTypeId) {
+  public int addAttraction(String attName, String attDescription, String attStatus, int attCapacity, Integer attMinimumHeight, int attDurationTime, int lsId, int attTypeId) {
     return attractionMapper.addAttraction(attName, attDescription, attStatus, attCapacity, attMinimumHeight, attDurationTime, lsId, attTypeId);
   }
 

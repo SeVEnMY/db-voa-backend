@@ -19,7 +19,7 @@ public interface AttractionMapper {
 
   @Insert("INSERT INTO nqz_attraction (att_name, att_description, att_status, att_capacity, att_minimum_height, att_duration_time, atttype_id, ls_id) " +
           "VALUES (#{attName}, #{attDescription}, #{attStatus}, #{attCapacity}, #{attMinimumHeight}, #{attDurationTime}, #{lsId}, #{attTypeId});  ")
-  int addAttraction(String attName, String attDescription, String attStatus, int attCapacity, int attMinimumHeight, int attDurationTime, int lsId, int attTypeId);
+  int addAttraction(String attName, String attDescription, String attStatus, int attCapacity, Integer attMinimumHeight, int attDurationTime, int lsId, int attTypeId);
 
   @Select("SELECT * FROM nqz_att_type")
   List<AttractionTypeEntry> findAllAttractionTypes();
