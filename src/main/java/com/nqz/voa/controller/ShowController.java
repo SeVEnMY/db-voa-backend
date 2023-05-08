@@ -135,4 +135,41 @@ public class ShowController {
     return json;
   }
 
+  @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+  public Object deleteShowById(@RequestParam int shId, HttpServletRequest request, HttpServletResponse response) {
+    JSONObject json = new JSONObject();
+
+    if (!accountController.isLogin(request, response).isSuccess()) {
+      json.put("message", "Not logged in!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
+    String accEmail = sessionUser.getAcc_email();
+    if (!accountService.isAdmin(accEmail)) {
+      json.put("message", "No permission!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    ShowEntry showEntry = showService.findShowById(shId);
+
+    if (showEntry == null) {
+      json.put("message", "Show not found!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    showService.deleteShowById(shId);
+    json.put("message", "Show deleted!");
+    json.put("success", true);
+    json.put("data", null);
+
+    return json;
+  }
+
 }

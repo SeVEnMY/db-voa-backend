@@ -2,6 +2,7 @@ package com.nqz.voa.mapper;
 
 import com.nqz.voa.entry.ShowEntry;
 import com.nqz.voa.entry.ShowTypeEntry;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -41,5 +42,8 @@ public interface ShowMapper {
 
   @Select("SELECT COUNT(*) FROM nqz_show WHERE shtype_id = 5")
   int getAdventureCount();
+
+  @Delete("DELETE FROM nqz_show WHERE sh_id = #{shId};")
+  int deleteShowById(int shId);
 
 }

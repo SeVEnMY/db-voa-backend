@@ -25,4 +25,6 @@ public interface ShowService {
   int getHorrorCount();
 
   int getAdventureCount();
+
+  int deleteShowById(int shId);
 }

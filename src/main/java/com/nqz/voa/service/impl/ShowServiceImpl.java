@@ -64,4 +64,9 @@ public class ShowServiceImpl implements ShowService {
   public int getAdventureCount() {
     return showMapper.getAdventureCount();
   }
+
+  @Override
+  public int deleteShowById(int shId) {
+    return showMapper.deleteShowById(shId);
+  }
 }
