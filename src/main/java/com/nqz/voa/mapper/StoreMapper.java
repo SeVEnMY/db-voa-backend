@@ -42,7 +42,7 @@ public interface StoreMapper {
   int addMenuItem(String miName, int miUnitPrice);
 
   @Insert("INSERT INTO nqz_st_mi  (st_id, mi_id) " +
-          "VALUES (#{stId}, #{miId);")
+          "VALUES (#{stId}, #{miId})")
   int addMenuItemToStore(int stId, int miId);
 
   @Select("SELECT SUM(o_quantity*mi_unit_price) FROM nqz_order NATURAL JOIN nqz_menu_item NATURAL JOIN nqz_store WHERE ctg_id = 1")
