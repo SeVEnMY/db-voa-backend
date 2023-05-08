@@ -10,6 +10,10 @@
 -- SQLINES DEMO *** no DDL - XMLTYPE
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
+
+CREATE SCHEMA `voa` ;
+USE voa;
+
 CREATE TABLE nqz_acc_role (
     acc_id INT NOT NULL,
     r_id   SMALLINT NOT NULL
@@ -25,6 +29,12 @@ CREATE TABLE nqz_account (
     acc_pwd   VARCHAR(50) NOT NULL,
     v_id      INT NOT NULL
 );
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE INDEX nqz_account__idx ON
+    nqz_account (
+        acc_email
+    ASC );
 
 ALTER TABLE nqz_account ADD CONSTRAINT nqz_account_pk PRIMARY KEY ( acc_id );
 ALTER TABLE nqz_account MODIFY acc_id INT AUTO_INCREMENT;
@@ -299,6 +309,7 @@ COMMENT ON COLUMN nqz_menu_item.mi_unit_price IS
 ALTER TABLE nqz_menu_item ADD CONSTRAINT nqz_menu_item_pk PRIMARY KEY ( mi_id );
 ALTER TABLE nqz_menu_item MODIFY mi_id SMALLINT AUTO_INCREMENT;
 
+
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
 CREATE TABLE nqz_order ( 
 --  order ID
@@ -373,6 +384,8 @@ COMMENT ON COLUMN nqz_order.park_id IS
 CREATE INDEX nqz_order__idx ON
     nqz_order (
         o_id
+    ASC,
+        o_date
     ASC );
 
 ALTER TABLE nqz_order ADD CONSTRAINT nqz_order_pk PRIMARY KEY ( o_id );
@@ -470,6 +483,12 @@ COMMENT ON COLUMN nqz_payment.pay_amount IS
 /* Moved to CREATE TABLE
 COMMENT ON COLUMN nqz_payment.pay_method IS
     'method can be "CA" or "CD"'; */
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE INDEX nqz_payment__idx ON
+    nqz_payment (
+        pay_id
+    ASC );
 
 ALTER TABLE nqz_payment ADD CONSTRAINT nqz_payment_pk PRIMARY KEY ( pay_id );
 ALTER TABLE nqz_payment MODIFY pay_id INT AUTO_INCREMENT;
@@ -607,7 +626,6 @@ COMMENT ON COLUMN nqz_store.ctg_id IS
 ALTER TABLE nqz_store ADD CONSTRAINT nqz_store_pk PRIMARY KEY ( st_id );
 ALTER TABLE nqz_store MODIFY st_id INT AUTO_INCREMENT;
 
-
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
 CREATE TABLE nqz_student ( 
 --  visitor ID
@@ -671,6 +689,12 @@ COMMENT ON COLUMN nqz_ticket.tkt_ispaid IS
 /* Moved to CREATE TABLE
 COMMENT ON COLUMN nqz_ticket.tkttype_id IS
     'ticket type id fk'; */
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE INDEX nqz_ticket__idx ON
+    nqz_ticket (
+        tkt_id
+    ASC );
 
 ALTER TABLE nqz_ticket ADD CONSTRAINT nqz_ticket_pk PRIMARY KEY ( tkt_id );
 ALTER TABLE nqz_ticket MODIFY tkt_id INT AUTO_INCREMENT;
@@ -740,7 +764,7 @@ CREATE TABLE nqz_visitor (
 --  country from
     v_country VARCHAR(15) NOT NULL COMMENT 'country from', 
 --  email address
-    v_email   VARCHAR(30) NOT NULL COMMENT 'email address',
+    v_email   VARCHAR(30) NOT NULL COMMENT 'email address', 
 --  telephone number
     v_telnum  VARCHAR(20) NOT NULL COMMENT 'telephone number', 
 -- SQLINES DEMO ***  "S", "I", or "G"
@@ -804,10 +828,13 @@ COMMENT ON COLUMN nqz_visitor.v_bdate IS
 CREATE INDEX nqz_visitor__idxv1 ON
     nqz_visitor (
         v_id
+    ASC,
+        v_email
     ASC );
 
 ALTER TABLE nqz_visitor ADD CONSTRAINT nqz_visitor_pk PRIMARY KEY ( v_id );
 ALTER TABLE nqz_visitor MODIFY v_id INT AUTO_INCREMENT;
+
 
 ALTER TABLE nqz_acc_role
     ADD CONSTRAINT nqz_acc_role_nqz_account_fk FOREIGN KEY ( acc_id )
@@ -911,12 +938,13 @@ ALTER TABLE nqz_tkt_att
     ADD CONSTRAINT nqz_tkt_att_nqz_ticket_fk FOREIGN KEY ( tkt_id )
         REFERENCES nqz_ticket ( tkt_id );
 
-
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+DROP TRIGGER IF EXISTS arc_fkarc_1_nqz_cash;
 
 -- SQLINES DEMO *** per Data Modeler Summary Report: 
 -- 
 -- SQLINES DEMO ***                        26
--- SQLINES DEMO ***                         2
+-- SQLINES DEMO ***                         5
 -- SQLINES DEMO ***                        53
 -- SQLINES DEMO ***                         0
 -- SQLINES DEMO ***                         0
