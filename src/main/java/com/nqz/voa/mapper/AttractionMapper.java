@@ -39,19 +39,19 @@ public interface AttractionMapper {
   List<AttractionEntry> findAttractionByTicketId(int tktId);
 
 
-  @Select("SELECT COUNT(*) FROM nqz_attraction WHERE atttype_id = 1")
+  @Select("SELECT COUNT(*) FROM nqz_tkt_att NATURAL JOIN nqz_attraction WHERE atttype_id = 1")
   int getRollerCoasterCount();
 
-  @Select("SELECT COUNT(*) FROM nqz_attraction WHERE atttype_id = 2")
+  @Select("SELECT COUNT(*) FROM nqz_tkt_att NATURAL JOIN nqz_attraction WHERE atttype_id = 2")
   int getWaterRideCount();
 
-  @Select("SELECT COUNT(*) FROM nqz_attraction WHERE atttype_id = 3")
+  @Select("SELECT COUNT(*) FROM nqz_tkt_att NATURAL JOIN nqz_attraction WHERE atttype_id = 3")
   int getDarkRideCount();
 
-  @Select("SELECT COUNT(*) FROM nqz_attraction WHERE atttype_id = 4")
+  @Select("SELECT COUNT(*) FROM nqz_tkt_att NATURAL JOIN nqz_attraction WHERE atttype_id = 4")
   int getKidRideCount();
 
-  @Select("SELECT COUNT(*) FROM nqz_attraction WHERE atttype_id = 5")
+  @Select("SELECT COUNT(*) FROM nqz_tkt_att NATURAL JOIN nqz_attraction WHERE atttype_id = 5")
   int getVrRideCount();
 
 }
