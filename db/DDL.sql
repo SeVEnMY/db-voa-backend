@@ -170,7 +170,7 @@ CREATE TABLE nqz_credit_debit (
 --  card CVV
     cd_cvv    VARCHAR(3) NOT NULL COMMENT 'card CVV', 
 --  credit or debit
-    cd_credit DOUBLE NOT NULL COMMENT 'credit or debit'
+    cd_credit TINYINT NOT NULL COMMENT 'credit or debit'
 );
 
 /* Moved to CREATE TABLE
@@ -200,9 +200,9 @@ COMMENT ON COLUMN nqz_credit_debit.cd_credit IS
 ALTER TABLE nqz_credit_debit ADD CONSTRAINT nqz_credit_debit_pk PRIMARY KEY ( pay_id );
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
-CREATE TABLE nqz_group ( 
+CREATE TABLE nqz_group (
 --  visitor ID
-    v_id   INT NOT NULL COMMENT 'visitor ID', 
+    v_id   INT NOT NULL COMMENT 'visitor ID',
 --  group size
     g_size INT NOT NULL COMMENT 'group size'
 );
@@ -218,9 +218,9 @@ COMMENT ON COLUMN nqz_group.g_size IS
 ALTER TABLE nqz_group ADD CONSTRAINT nqz_group_pk PRIMARY KEY ( v_id );
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
-CREATE TABLE nqz_individual ( 
+CREATE TABLE nqz_individual (
 --  visitor ID
-    v_id          INT NOT NULL COMMENT 'visitor ID', 
+    v_id          INT NOT NULL COMMENT 'visitor ID',
 --  times of visit
     i_times_visit SMALLINT NOT NULL COMMENT 'times of visit'
 );
@@ -236,9 +236,9 @@ COMMENT ON COLUMN nqz_individual.i_times_visit IS
 ALTER TABLE nqz_individual ADD CONSTRAINT nqz_individual_pk PRIMARY KEY ( v_id );
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
-CREATE TABLE nqz_location_section ( 
+CREATE TABLE nqz_location_section (
 -- SQLINES DEMO ***  ID
-    ls_id   SMALLINT NOT NULL COMMENT 'location section ID', 
+    ls_id   SMALLINT NOT NULL COMMENT 'location section ID',
 -- SQLINES DEMO ***  can be Lot A, Lot B, Lot C, Lot D etc
     ls_name VARCHAR(15) NOT NULL COMMENT 'location section can be Lot A, Lot B, Lot C, Lot D etc'
 );
@@ -255,13 +255,13 @@ ALTER TABLE nqz_location_section ADD CONSTRAINT nqz_location_section_pk PRIMARY 
 ALTER TABLE nqz_location_section MODIFY ls_id SMALLINT AUTO_INCREMENT;
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
-CREATE TABLE nqz_member ( 
+CREATE TABLE nqz_member (
 --  visitor ID
-    v_id            INT NOT NULL COMMENT 'visitor ID', 
+    v_id            INT NOT NULL COMMENT 'visitor ID',
 -- SQLINES DEMO ***  date
-    m_startdate     DATETIME NOT NULL COMMENT 'membership start date', 
+    m_startdate     DATETIME NOT NULL COMMENT 'membership start date',
 -- SQLINES DEMO *** ate
-    m_enddate       DATETIME NOT NULL COMMENT 'membership end date', 
+    m_enddate       DATETIME NOT NULL COMMENT 'membership end date',
 -- SQLINES DEMO *** s purchased
     m_num_purchased TINYINT NOT NULL COMMENT 'number of tickets purchased'
 );
@@ -285,11 +285,11 @@ COMMENT ON COLUMN nqz_member.m_num_purchased IS
 ALTER TABLE nqz_member ADD CONSTRAINT nqz_member_pk PRIMARY KEY ( v_id );
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
-CREATE TABLE nqz_menu_item ( 
+CREATE TABLE nqz_menu_item (
 --  menu item ID
-    mi_id         SMALLINT NOT NULL COMMENT 'menu item ID', 
+    mi_id         INT NOT NULL COMMENT 'menu item ID',
 --  menu item name
-    mi_name       VARCHAR(30) NOT NULL COMMENT 'menu item name', 
+    mi_name       VARCHAR(30) NOT NULL COMMENT 'menu item name',
 -- SQLINES DEMO *** rice
     mi_unit_price INT NOT NULL COMMENT 'menu item unit price'
 );
@@ -307,31 +307,31 @@ COMMENT ON COLUMN nqz_menu_item.mi_unit_price IS
     'menu item unit price'; */
 
 ALTER TABLE nqz_menu_item ADD CONSTRAINT nqz_menu_item_pk PRIMARY KEY ( mi_id );
-ALTER TABLE nqz_menu_item MODIFY mi_id SMALLINT AUTO_INCREMENT;
+ALTER TABLE nqz_menu_item MODIFY mi_id INT AUTO_INCREMENT;
 
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
-CREATE TABLE nqz_order ( 
+CREATE TABLE nqz_order (
 --  order ID
-    o_id       INT NOT NULL COMMENT 'order ID', 
+    o_id       INT NOT NULL COMMENT 'order ID',
 --  order date
-    o_date     DATETIME NOT NULL COMMENT 'order date', 
+    o_date     DATETIME NOT NULL COMMENT 'order date',
 --  order quantity
-    o_quantity INT NOT NULL COMMENT 'order quantity', 
+    o_quantity INT NOT NULL COMMENT 'order quantity',
 --  order amount
-    o_amount   BIGINT NOT NULL COMMENT 'order amount', 
+    o_amount   BIGINT NOT NULL COMMENT 'order amount',
 --  show id fk
-    sh_id      INT COMMENT 'show id fk', 
+    sh_id      INT COMMENT 'show id fk',
 --  visitor id fk
-    v_id       INT NOT NULL COMMENT 'visitor id fk', 
+    v_id       INT NOT NULL COMMENT 'visitor id fk',
 --  payment id fk
-    pay_id     INT COMMENT 'payment id fk', 
+    pay_id     INT COMMENT 'payment id fk',
 --  store id fk
-    st_id      INT COMMENT 'store id fk', 
+    st_id      INT COMMENT 'store id fk',
 --  menu item id fk
-    mi_id      SMALLINT COMMENT 'menu item id fk', 
+    mi_id      INT COMMENT 'menu item id fk',
 --  ticket id fk
-    tkt_id     INT COMMENT 'ticket id fk', 
+    tkt_id     INT COMMENT 'ticket id fk',
 --  parking id fk
     park_id    INT COMMENT 'parking id fk'
 );
@@ -392,17 +392,17 @@ ALTER TABLE nqz_order ADD CONSTRAINT nqz_order_pk PRIMARY KEY ( o_id );
 ALTER TABLE nqz_order MODIFY o_id INT AUTO_INCREMENT;
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
-CREATE TABLE nqz_parking ( 
+CREATE TABLE nqz_parking (
 --  parking ID
-    park_id       INT NOT NULL COMMENT 'parking ID', 
+    park_id       INT NOT NULL COMMENT 'parking ID',
 --  parking time in
-    park_time_in  DATETIME NOT NULL COMMENT 'parking time in', 
+    park_time_in  DATETIME NOT NULL COMMENT 'parking time in',
 --  parking time out
-    park_time_out DATETIME NOT NULL COMMENT 'parking time out', 
+    park_time_out DATETIME NOT NULL COMMENT 'parking time out',
 -- SQLINES DEMO *** 1 hour
-    park_fee      INT NOT NULL COMMENT 'parking fee for 1 hour', 
+    park_fee      INT NOT NULL COMMENT 'parking fee for 1 hour',
 -- SQLINES DEMO *** ber
-    park_spotno   SMALLINT NOT NULL COMMENT 'parking spot number', 
+    park_spotno   INT NOT NULL COMMENT 'parking spot number',
 --  parking lot id fk
     pl_id         SMALLINT NOT NULL COMMENT 'parking lot id fk'
 );
@@ -435,9 +435,9 @@ ALTER TABLE nqz_parking ADD CONSTRAINT nqz_parking_pk PRIMARY KEY ( park_id );
 ALTER TABLE nqz_parking MODIFY park_id INT AUTO_INCREMENT;
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
-CREATE TABLE nqz_parking_lot ( 
+CREATE TABLE nqz_parking_lot (
 --  parking lot ID
-    pl_id   SMALLINT NOT NULL COMMENT 'parking lot ID', 
+    pl_id   SMALLINT NOT NULL COMMENT 'parking lot ID',
 --  parking lot name
     pl_name VARCHAR(15) NOT NULL COMMENT 'parking lot name'
 );
@@ -454,13 +454,13 @@ ALTER TABLE nqz_parking_lot ADD CONSTRAINT nqz_parking_lot_pk PRIMARY KEY ( pl_i
 ALTER TABLE nqz_parking_lot MODIFY pl_id SMALLINT AUTO_INCREMENT;
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
-CREATE TABLE nqz_payment ( 
+CREATE TABLE nqz_payment (
 --  payment id
-    pay_id     INT NOT NULL COMMENT 'payment id', 
+    pay_id     INT NOT NULL COMMENT 'payment id',
 --  payment time
-    pay_time   DATETIME NOT NULL COMMENT 'payment time', 
+    pay_time   DATETIME NOT NULL COMMENT 'payment time',
 --  payment amount
-    pay_amount DECIMAL(20) NOT NULL COMMENT 'payment amount', 
+    pay_amount DECIMAL(20) NOT NULL COMMENT 'payment amount',
 -- SQLINES DEMO *** A" or "CD"
     pay_method VARCHAR(11) NOT NULL COMMENT 'method can be "CA" or "CD"'
 );
@@ -503,9 +503,9 @@ ALTER TABLE nqz_role ADD CONSTRAINT nqz_role_pk PRIMARY KEY ( r_id );
 ALTER TABLE nqz_role MODIFY r_id SMALLINT AUTO_INCREMENT;
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
-CREATE TABLE nqz_sh_type ( 
+CREATE TABLE nqz_sh_type (
 --  show type ID
-    shtype_id   SMALLINT NOT NULL COMMENT 'show type ID', 
+    shtype_id   SMALLINT NOT NULL COMMENT 'show type ID',
 -- SQLINES DEMO ***  drama, musical, comedy, horror or adventure
     shtype_name VARCHAR(15) NOT NULL COMMENT 'show type can be drama, musical, comedy, horror or adventure'
 );
@@ -522,21 +522,21 @@ ALTER TABLE nqz_sh_type ADD CONSTRAINT nqz_sh_type_pk PRIMARY KEY ( shtype_id );
 ALTER TABLE nqz_sh_type MODIFY shtype_id SMALLINT AUTO_INCREMENT;
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
-CREATE TABLE nqz_show ( 
+CREATE TABLE nqz_show (
 --  show ID
-    sh_id             INT NOT NULL COMMENT 'show ID', 
+    sh_id             INT NOT NULL COMMENT 'show ID',
 --  show name
-    sh_name           VARCHAR(30) NOT NULL COMMENT 'show name', 
+    sh_name           VARCHAR(30) NOT NULL COMMENT 'show name',
 --  show description
-    sh_description    VARCHAR(200) NOT NULL COMMENT 'show description', 
+    sh_description    VARCHAR(200) NOT NULL COMMENT 'show description',
 --  show start time
-    sh_start_time     DATETIME NOT NULL COMMENT 'show start time', 
+    sh_start_time     DATETIME NOT NULL COMMENT 'show start time',
 --  show end time
-    sh_end_time       DATETIME NOT NULL COMMENT 'show end time', 
+    sh_end_time       DATETIME NOT NULL COMMENT 'show end time',
 -- SQLINES DEMO *** sible or not
-    sh_wheelchair_acc DOUBLE NOT NULL COMMENT 'wheelchair accessible or not', 
+    sh_wheelchair_acc TINYINT NOT NULL COMMENT 'wheelchair accessible or not',
 --  show price
-    sh_price          INT NOT NULL COMMENT 'show price', 
+    sh_price          INT NOT NULL COMMENT 'show price',
 --  show type id fk
     shtype_id         SMALLINT NOT NULL COMMENT 'show type id fk'
 );
@@ -577,11 +577,11 @@ ALTER TABLE nqz_show ADD CONSTRAINT nqz_show_pk PRIMARY KEY ( sh_id );
 ALTER TABLE nqz_show MODIFY sh_id INT AUTO_INCREMENT;
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
-CREATE TABLE nqz_st_mi ( 
+CREATE TABLE nqz_st_mi (
 --  store id fk
-    st_id INT NOT NULL COMMENT 'store id fk', 
+    st_id INT NOT NULL COMMENT 'store id fk',
 --  menu item id fk
-    mi_id SMALLINT NOT NULL COMMENT 'menu item id fk'
+    mi_id INT NOT NULL COMMENT 'menu item id fk'
 );
 
 /* Moved to CREATE TABLE
@@ -596,13 +596,13 @@ ALTER TABLE nqz_st_mi ADD CONSTRAINT nqz_st_mi_pk PRIMARY KEY ( st_id,
                                                                 mi_id );
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
-CREATE TABLE nqz_store ( 
+CREATE TABLE nqz_store (
 --  store ID
-    st_id          INT NOT NULL COMMENT 'store ID', 
+    st_id          INT NOT NULL COMMENT 'store ID',
 --  store name
-    st_name        VARCHAR(30) NOT NULL COMMENT 'store name', 
+    st_name        VARCHAR(30) NOT NULL COMMENT 'store name',
 --  store description
-    st_description VARCHAR(200) NOT NULL COMMENT 'store description', 
+    st_description VARCHAR(200) NOT NULL COMMENT 'store description',
 --  category id fk
     ctg_id         SMALLINT NOT NULL COMMENT 'category id fk'
 );
@@ -627,9 +627,9 @@ ALTER TABLE nqz_store ADD CONSTRAINT nqz_store_pk PRIMARY KEY ( st_id );
 ALTER TABLE nqz_store MODIFY st_id INT AUTO_INCREMENT;
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
-CREATE TABLE nqz_student ( 
+CREATE TABLE nqz_student (
 --  visitor ID
-    v_id       INT NOT NULL COMMENT 'visitor ID', 
+    v_id       INT NOT NULL COMMENT 'visitor ID',
 --  school name
     stu_school VARCHAR(50) NOT NULL COMMENT 'school name'
 );
@@ -645,19 +645,19 @@ COMMENT ON COLUMN nqz_student.stu_school IS
 ALTER TABLE nqz_student ADD CONSTRAINT nqz_student_pk PRIMARY KEY ( v_id );
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
-CREATE TABLE nqz_ticket ( 
+CREATE TABLE nqz_ticket (
 --  ticket ID
-    tkt_id         INT NOT NULL COMMENT 'ticket ID', 
+    tkt_id         INT NOT NULL COMMENT 'ticket ID',
 -- SQLINES DEMO ***  online or onsite
-    tkt_online     DOUBLE NOT NULL COMMENT 'ticket purchased online or onsite', 
+    tkt_online     TINYINT NOT NULL COMMENT 'ticket purchased online or onsite',
 --  visit date
-    tkt_visit_date DATETIME NOT NULL COMMENT 'visit date', 
+    tkt_visit_date DATETIME NOT NULL COMMENT 'visit date',
 -- SQLINES DEMO *** price
-    tkt_price      SMALLINT NOT NULL COMMENT 'ticket original price', 
+    tkt_price      SMALLINT NOT NULL COMMENT 'ticket original price',
 --  ticket discount
-    tkt_discount   SMALLINT NOT NULL COMMENT 'ticket discount', 
+    tkt_discount   SMALLINT NOT NULL COMMENT 'ticket discount',
 --  ticket paid or not
-    tkt_ispaid     DOUBLE NOT NULL COMMENT 'ticket paid or not', 
+    tkt_ispaid     TINYINT NOT NULL COMMENT 'ticket paid or not',
 --  ticket type id fk
     tkttype_id     SMALLINT NOT NULL COMMENT 'ticket type id fk'
 );
