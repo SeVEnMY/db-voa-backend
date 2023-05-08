@@ -28,13 +28,13 @@ public interface StoreService {
 
   int addMenuItemToStore(int stId, int miId);
 
-  int getFoodStallSalesCount();
+  Integer getFoodStallSalesCount();
 
-  int getIceCreamParlorSalesCount();
+  Integer getIceCreamParlorSalesCount();
 
-  int getRestaurantSalesCount();
+  Integer getRestaurantSalesCount();
 
-  int getGiftShopSalesCount();
+  Integer getGiftShopSalesCount();
 
-  int getApparelsSalesCount();
+  Integer getApparelsSalesCount();
 }

@@ -197,11 +197,11 @@ public class StoreController {
       return json;
     }
 
-    json.put("foodstall", storeService.getFoodStallSalesCount());
-    json.put("icecreamparlor", storeService.getIceCreamParlorSalesCount());
-    json.put("restaurant", storeService.getRestaurantSalesCount());
-    json.put("giftshop", storeService.getGiftShopSalesCount());
-    json.put("apparels", storeService.getApparelsSalesCount());
+    json.put("foodstall", storeService.getFoodStallSalesCount() == null ? 0 : storeService.getFoodStallSalesCount());
+    json.put("icecreamparlor", storeService.getIceCreamParlorSalesCount() == null ? 0 : storeService.getIceCreamParlorSalesCount());
+    json.put("restaurant", storeService.getRestaurantSalesCount() == null ? 0 : storeService.getRestaurantSalesCount());
+    json.put("giftshop", storeService.getGiftShopSalesCount() == null ? 0 : storeService.getGiftShopSalesCount());
+    json.put("apparels", storeService.getApparelsSalesCount() == null ? 0 : storeService.getApparelsSalesCount());
     return json;
   }
 

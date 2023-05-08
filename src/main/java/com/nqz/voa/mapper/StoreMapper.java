@@ -49,15 +49,15 @@ public interface StoreMapper {
   Integer getFoodStallSalesCount();
 
   @Select("SELECT SUM(o_quantity*mi_unit_price) FROM nqz_order NATURAL JOIN nqz_menu_item NATURAL JOIN nqz_store WHERE ctg_id = 2")
-  int getIceCreamParlorSalesCount();
+  Integer getIceCreamParlorSalesCount();
 
   @Select("SELECT SUM(o_quantity*mi_unit_price) FROM nqz_order NATURAL JOIN nqz_menu_item NATURAL JOIN nqz_store WHERE ctg_id = 3")
-  int getRestaurantSalesCount();
+  Integer getRestaurantSalesCount();
 
   @Select("SELECT SUM(o_quantity*mi_unit_price) FROM nqz_order NATURAL JOIN nqz_menu_item NATURAL JOIN nqz_store WHERE ctg_id = 4")
-  int getGiftShopSalesCount();
+  Integer getGiftShopSalesCount();
 
   @Select("SELECT SUM(o_quantity*mi_unit_price) FROM nqz_order NATURAL JOIN nqz_menu_item NATURAL JOIN nqz_store WHERE ctg_id = 5")
-  int getApparelsSalesCount();
+  Integer getApparelsSalesCount();
 
 }
