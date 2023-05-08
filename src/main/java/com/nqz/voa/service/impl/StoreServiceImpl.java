@@ -67,27 +67,27 @@ public class StoreServiceImpl implements StoreService {
   }
 
   @Override
-  public int getFoodStallCount() {
-    return storeMapper.getFoodStallCount();
+  public int getFoodStallSalesCount() {
+    return storeMapper.getFoodStallSalesCount();
   }
 
   @Override
-  public int getIceCreamParlorCount() {
-    return storeMapper.getIceCreamParlorCount();
+  public int getIceCreamParlorSalesCount() {
+    return storeMapper.getIceCreamParlorSalesCount();
   }
 
   @Override
-  public int getRestaurantCount() {
-    return storeMapper.getRestaurantCount();
+  public int getRestaurantSalesCount() {
+    return storeMapper.getRestaurantSalesCount();
   }
 
   @Override
-  public int getGiftShopCount() {
-    return storeMapper.getGiftShopCount();
+  public int getGiftShopSalesCount() {
+    return storeMapper.getGiftShopSalesCount();
   }
 
   @Override
-  public int getApparelsCount() {
-    return storeMapper.getApparelsCount();
+  public int getApparelsSalesCount() {
+    return storeMapper.getApparelsSalesCount();
   }
 }

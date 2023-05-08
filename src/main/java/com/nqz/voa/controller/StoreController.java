@@ -177,8 +177,8 @@ public class StoreController {
     return storeService.addMenuItemToStore(stId, miId);
   }
 
-  @RequestMapping(value = "/count", method = RequestMethod.GET)
-  public Object getStoreCount(HttpServletRequest request, HttpServletResponse response) {
+  @RequestMapping(value = "/salescount", method = RequestMethod.GET)
+  public Object getStoreSalesCount(HttpServletRequest request, HttpServletResponse response) {
     JSONObject json = new JSONObject();
 
     if (!accountController.isLogin(request, response).isSuccess()) {
@@ -197,11 +197,11 @@ public class StoreController {
       return json;
     }
 
-    json.put("foodstall", storeService.getFoodStallCount());
-    json.put("icecreamparlor", storeService.getIceCreamParlorCount());
-    json.put("restaurant", storeService.getRestaurantCount());
-    json.put("giftshop", storeService.getGiftShopCount());
-    json.put("apparels", storeService.getApparelsCount());
+    json.put("foodstall", storeService.getFoodStallSalesCount());
+    json.put("icecreamparlor", storeService.getIceCreamParlorSalesCount());
+    json.put("restaurant", storeService.getRestaurantSalesCount());
+    json.put("giftshop", storeService.getGiftShopSalesCount());
+    json.put("apparels", storeService.getApparelsSalesCount());
     return json;
   }
 

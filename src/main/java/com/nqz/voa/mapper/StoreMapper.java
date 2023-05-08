@@ -45,19 +45,19 @@ public interface StoreMapper {
           "VALUES (#{stId}, #{miId);")
   int addMenuItemToStore(int stId, int miId);
 
-  @Select("SELECT COUNT(*) FROM nqz_store WHERE ctg_id = 1")
-  int getFoodStallCount();
+  @Select("SELECT SUM(o_quantity*mi_unit_price) FROM nqz_order NATURAL JOIN nqz_menu_item NATURAL JOIN nqz_store WHERE ctg_id = 1")
+  Integer getFoodStallSalesCount();
 
-  @Select("SELECT COUNT(*) FROM nqz_store WHERE ctg_id = 2")
-  int getIceCreamParlorCount();
+  @Select("SELECT SUM(o_quantity*mi_unit_price) FROM nqz_order NATURAL JOIN nqz_menu_item NATURAL JOIN nqz_store WHERE ctg_id = 2")
+  int getIceCreamParlorSalesCount();
 
-  @Select("SELECT COUNT(*) FROM nqz_store WHERE ctg_id = 3")
-  int getRestaurantCount();
+  @Select("SELECT SUM(o_quantity*mi_unit_price) FROM nqz_order NATURAL JOIN nqz_menu_item NATURAL JOIN nqz_store WHERE ctg_id = 3")
+  int getRestaurantSalesCount();
 
-  @Select("SELECT COUNT(*) FROM nqz_store WHERE ctg_id = 4")
-  int getGiftShopCount();
+  @Select("SELECT SUM(o_quantity*mi_unit_price) FROM nqz_order NATURAL JOIN nqz_menu_item NATURAL JOIN nqz_store WHERE ctg_id = 4")
+  int getGiftShopSalesCount();
 
-  @Select("SELECT COUNT(*) FROM nqz_store WHERE ctg_id = 5")
-  int getApparelsCount();
+  @Select("SELECT SUM(o_quantity*mi_unit_price) FROM nqz_order NATURAL JOIN nqz_menu_item NATURAL JOIN nqz_store WHERE ctg_id = 5")
+  int getApparelsSalesCount();
 
 }
