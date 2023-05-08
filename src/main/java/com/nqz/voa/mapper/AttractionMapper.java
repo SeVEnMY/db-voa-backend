@@ -3,9 +3,7 @@ package com.nqz.voa.mapper;
 import com.nqz.voa.entry.AttractionEntry;
 import com.nqz.voa.entry.AttractionTypeEntry;
 import com.nqz.voa.entry.LocationSectionEntry;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -53,5 +51,11 @@ public interface AttractionMapper {
 
   @Select("SELECT COUNT(*) FROM nqz_tkt_att NATURAL JOIN nqz_attraction WHERE atttype_id = 5")
   int getVrRideCount();
+
+  @Delete("DELETE FROM nqz_tkt_att WHERE att_id = #{attId};")
+  int deleteTktAttByAttId(int attId);
+
+  @Delete("DELETE FROM nqz_attraction WHERE att_id = #{attId};")
+  int deleteAttractionById(int attId);
 
 }

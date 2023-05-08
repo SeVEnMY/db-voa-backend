@@ -72,6 +72,11 @@ public class AttractionServiceImpl implements AttractionService {
   }
 
   @Override
+  public int deleteTktAttByAttId(int attId) {
+    return attractionMapper.deleteTktAttByAttId(attId);
+  }
+
+  @Override
   public int getKidRideCount() {
     return attractionMapper.getKidRideCount();
   }
@@ -79,6 +84,11 @@ public class AttractionServiceImpl implements AttractionService {
   @Override
   public int getVrRideCount() {
     return attractionMapper.getVrRideCount();
+  }
+
+  @Override
+  public int deleteAttractionById(int attId) {
+    return attractionMapper.deleteAttractionById(attId);
   }
 
 }

@@ -184,4 +184,42 @@ public class AttractionController {
     return json;
   }
 
+  @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+  public Object deleteAttractionById(@RequestParam int attId, HttpServletRequest request, HttpServletResponse response) {
+    JSONObject json = new JSONObject();
+
+    if (!accountController.isLogin(request, response).isSuccess()) {
+      json.put("message", "Not logged in!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    AccountEntry sessionUser = (AccountEntry) (request.getSession()).getAttribute(SESSION_NAME);
+    String accEmail = sessionUser.getAcc_email();
+    if (!accountService.isAdmin(accEmail)) {
+      json.put("message", "No permission!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    AttractionEntry attractionEntry = attractionService.findAttractionById(attId);
+
+    if (attractionEntry == null) {
+      json.put("message", "Attraction not found!");
+      json.put("success", false);
+      json.put("data", null);
+      return json;
+    }
+
+    attractionService.deleteTktAttByAttId(attId);
+    attractionService.deleteAttractionById(attId);
+    json.put("message", "Attraction deleted!");
+    json.put("success", true);
+    json.put("data", null);
+
+    return json;
+  }
+
 }

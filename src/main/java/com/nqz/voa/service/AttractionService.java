@@ -29,7 +29,10 @@ public interface AttractionService {
 
   int getDarkRideCount();
 
+  int deleteTktAttByAttId(int attId);
   int getKidRideCount();
 
   int getVrRideCount();
+
+  int deleteAttractionById(int attId);
 }
